@@ -87,8 +87,11 @@ namespace TheSeer\fDOM {
        * @return fDOMElement Reference to created fDOMElement
        */
       public function appendElement($name, $content = null) {
-         $node = $this->ownerDocument->createElement($name, $content);
+         $node = $this->ownerDocument->createElement($name);
          $this->appendChild($node);
+         if (!is_null($content)) {
+            $node->nodeValue = $content;
+         }
          return $node;
       }
 
@@ -102,8 +105,11 @@ namespace TheSeer\fDOM {
        * @return fDOMElement Reference to created fDOMElement
        */
       public function appendElementNS($ns, $name, $content = null) {
-         $node = $this->ownerDocument->createElementNS($ns, $name, $content);
+         $node = $this->ownerDocument->createElementNS($ns, $name);
          $this->appendChild($node);
+         if (!is_null($content)) {
+            $node->nodeValue = $content;
+         }
          return $node;
       }
 

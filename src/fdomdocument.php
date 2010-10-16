@@ -241,7 +241,12 @@ namespace TheSeer\fDOM {
          if (!isset($this->prefixes[$prefix])) {
             throw new fDOMException("'$prefix' not bound", fDOMException::UnboundPrefix);
          }
-         return $this->createElementNS($this->prefixes[$prefix], $prefix.':'.$name, $content);
+         $node = $this->createElementNS($this->prefixes[$prefix], $prefix.':'.$name);
+         if (!is_null($content)) {
+            $node->nodeValue = $content;
+         }
+         return $node;
+
       }
 
    } // fDOMDocument
