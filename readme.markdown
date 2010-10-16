@@ -8,8 +8,8 @@ and shortcuts for convinience and to simplify the usage of DOM.
 Requirements
 ------------
 
-PHP: 5.3.0
-Extensions: dom, libxml
+    PHP: 5.3.0
+    Extensions: dom, libxml
 
 Usage
 -----
@@ -20,17 +20,17 @@ drop in replacement for DOMDocument.
 Usage Samples
 --------------
 
-<?php
+    <?php
 
- $dom = new fDOMDOcument();
- try {
-   $dom->loadXML('<?xml version="1.0" ?><root><child name="foo" /></root>');
- } catch (fDOMException $e) {
-   die($e);
- }
+    $dom = new fDOMDOcument();
+    try {
+	$dom->loadXML('<?xml version="1.0" ?><root><child name="foo" /></root>');
+    } catch (fDOMException $e) {
+	die($e);
+    }
 
- $child = $dom->query('//child')->item(0);
- print_r($child->getAttribute('name'));
- print_r($child->getAttribute('missing','DefaultValue'));
+    $child = $dom->query('//child')->item(0);
+    print_r($child->getAttribute('name'));
+    print_r($child->getAttribute('missing','DefaultValue'));
 
-?>
+    ?>
