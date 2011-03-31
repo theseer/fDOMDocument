@@ -84,7 +84,7 @@ namespace TheSeer\fDOM {
 
          $this->registerNodeClass('\DOMNode', 'TheSeer\fDOM\fDOMNode');
          $this->registerNodeClass('\DOMElement', 'TheSeer\fDOM\fDOMElement');
-         $this->registerNodeClass('\DOMDocumentFragment', '\TheSeer\fDOM\fDOMDocumentFragment');
+         $this->registerNodeClass('\DOMDocumentFragment', 'TheSeer\fDOM\fDOMDocumentFragment');
 
          return $rc;
       }
