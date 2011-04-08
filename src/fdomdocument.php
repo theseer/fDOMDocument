@@ -84,7 +84,7 @@ namespace TheSeer\fDOM {
 
          $this->registerNodeClass('\DOMNode', 'TheSeer\fDOM\fDOMNode');
          $this->registerNodeClass('\DOMElement', 'TheSeer\fDOM\fDOMElement');
-         $this->registerNodeClass('\DOMDocumentFragment', '\TheSeer\fDOM\fDOMDocumentFragment');
+         $this->registerNodeClass('\DOMDocumentFragment', 'TheSeer\fDOM\fDOMDocumentFragment');
 
          return $rc;
       }
@@ -164,6 +164,72 @@ namespace TheSeer\fDOM {
          $tmp = @parent :: loadHTML($source);
          if (!$tmp) {
             throw new fDOMException('parsing html string failed', fDOMException::ParseError);
+         }
+      }
+
+      /**
+       * Wrapper to DOMDocument::save with exception handling
+       *
+       * @param string  $fname   filename to save to
+       * @param integer $options Options bitmask (@see DOMDocument::save)
+       *
+       * @return integer bytes saved
+       */
+      public function save($filename, $options = NULL) {
+         $tmp = @parent::save($filename, $options);
+         if (!$tmp) {
+            throw new fDOMException('saving xml file failed', fDOMException::SaveError);
+         }
+         return $tmp;
+      }
+
+      /**
+       * Wrapper to DOMDocument::saveHTML with exception handling
+       *
+       * @return string html content
+       */
+      public function saveHTML() {
+         $tmp = @parent::saveHTML();
+         if (!$tmp) {
+            throw new fDOMException('serializing to HTML failed', fDOMException::SaveError);
+         }
+         return $tmp;
+      }
+
+      /**
+       * Wrapper to DOMDocument::saveHTMLfile with exception handling
+       *
+       * @param string $fname filename to save to
+       * @param integer $options Options bitmask (@see DOMDocument::saveHTMLFile)
+       *
+       * @return integer bytes saved
+       */
+      public function saveHTMLFile($filename, $options = NULL) {
+         $tmp = @parent::saveHTMLFile($filename, $options);
+         if (!$tmp) {
+            throw new fDOMException('saving to HTML file failed', fDOMException::SaveError);
+         }
+         return $tmp;
+      }
+
+      /**
+       * Wrapper to DOMDocument::saveHTMLfile with exception handling
+       *
+       * @param string $fname filename to save to
+       *
+       * @return integer bytes saved
+       */
+      public function saveXML(\DOMNode $node = NULL, $options = NULL) {
+         try {
+            $tmp = @parent::saveXML($node, $options);
+            if (!$tmp) {
+               throw new fDOMException('serializing to XML failed', fDOMException::SaveError);
+            }
+         } catch (\Exception $e) {
+            if (!$e instanceof fDOMException) {
+               throw new fDOMException($e->getMessage(), fDOMException::SaveError, $e);
+            }
+            throw $e;
          }
       }
 

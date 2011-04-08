@@ -50,10 +50,11 @@ namespace TheSeer\fDOM {
 
       const LoadError          = 1;
       const ParseError         = 2;
-      const QueryError         = 3;
-      const RegistrationFailed = 4;
-      const NoDOMXPath         = 5;
-      const UnboundPrefix      = 6;
+      const SaveError          = 3;
+      const QueryError         = 4;
+      const RegistrationFailed = 5;
+      const NoDOMXPath         = 6;
+      const UnboundPrefix      = 7;
 
       /**
        * List of libxml error objects
@@ -77,10 +78,10 @@ namespace TheSeer\fDOM {
        *
        * @return void
        */
-      public function __construct($message, $code = 0) {
+      public function __construct($message, $code = 0, $chain = NULL) {
          $this->errorList = libxml_get_errors();
          libxml_clear_errors();
-         parent :: __construct($message, $code);
+         parent :: __construct($message, $code, $chain);
 
          $this->fullMessage = 'fDOMException: '.$message."\n\nDetails as follows:\n";
 
