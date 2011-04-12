@@ -188,7 +188,7 @@ namespace TheSeer\fDOM {
        * @return boolean true on match, false if they differ
        *
        */
-      public function inSameDocument(DomNode $node) {
+      public function inSameDocument(\DomNode $node) {
          return ($this->ownerDocument->isSameNode($node->ownerDocument));
       }
 
