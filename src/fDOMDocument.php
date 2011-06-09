@@ -213,11 +213,12 @@ namespace TheSeer\fDOM {
       }
 
       /**
-       * Wrapper to DOMDocument::saveHTMLfile with exception handling
+       * Wrapper to DOMDocument::saveXML with exception handling
        *
-       * @param string $fname filename to save to
+       * @param \DOMNode context  node to start serializing at
+       * @param integer  options  options flags as bitmask
        *
-       * @return integer bytes saved
+       * @return string serialized XML
        */
       public function saveXML(\DOMNode $node = NULL, $options = NULL) {
          try {
@@ -225,6 +226,7 @@ namespace TheSeer\fDOM {
             if (!$tmp) {
                throw new fDOMException('serializing to XML failed', fDOMException::SaveError);
             }
+            return $tmp;
          } catch (\Exception $e) {
             if (!$e instanceof fDOMException) {
                throw new fDOMException($e->getMessage(), fDOMException::SaveError, $e);
