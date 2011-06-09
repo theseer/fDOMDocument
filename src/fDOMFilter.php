@@ -35,14 +35,14 @@
  * @author    Arne Blankerts <arne@blankerts.de>
  * @copyright Arne Blankerts <arne@blankerts.de>, All rights reserved.
  * @license   http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @link      http://github.com/theseer/fdomdocument
+ * @link      http://github.com/theseer/fDOMdocument
  *
  */
 
 namespace TheSeer\fDOM {
 
    /**
-    * fDomFilter interface
+    * fDOMFilter interface
     *
     * @category Core
     * @package  Core
@@ -50,7 +50,7 @@ namespace TheSeer\fDOM {
     * @author   Arne Blankerts <theseer@fcms.de>
     *
     */
-   interface fDomFilter {
+   interface fDOMFilter {
 
       /**
        * xml namespace this filter is for
@@ -64,14 +64,14 @@ namespace TheSeer\fDOM {
        *
        * @param string $tagname Tagname
        *
-       * @return fDomFilter Instance of a class implementing fDomFilter
+       * @return fDOMFilter Instance of a class implementing fDOMFilter
        */
       public function getInstanceForTagName($tagname);
 
       /**
        * Factory Helper to get Instance for attribute handler for current tag
        *
-       * @return fDomFilter Instance of a class implementing fDomFilter
+       * @return fDOMFilter Instance of a class implementing fDOMFilter
        */
       public function getInstanceForAttributes();
 
@@ -80,7 +80,7 @@ namespace TheSeer\fDOM {
    // ===============================================================================================================
 
    /**
-    * fDomFilterProcessor class
+    * fDOMFilterProcessor class
     *
     * @category Core
     * @package  Core
@@ -88,7 +88,7 @@ namespace TheSeer\fDOM {
     * @author   Arne Blankerts <theseer@fcms.de>
     *
     */
-   class fDomFilterProcessor {
+   class fDOMFilterProcessor {
 
       private $dom;
       private $filterList = array();
@@ -96,22 +96,22 @@ namespace TheSeer\fDOM {
       /**
        * Constructor
        *
-       * @param fDomDocument $fDom Reference to fDomDocument this processor will work on
+       * @param fDOMDocument $fDOM Reference to fDOMDocument this processor will work on
        *
        * @return void
        */
-      public function __construct(fDomDocument $fDom) {
-         $this->dom = $fDom;
+      public function __construct(fDOMDocument $fDOM) {
+         $this->dom = $fDOM;
       }
 
       /**
        * Add Filter Implementation to list
        *
-       * @param fDomFilter $filter Instance of an fDomFilter class
+       * @param fDOMFilter $filter Instance of an fDOMFilter class
        *
        * @return void
        */
-      public function addFilter(fDomFilter $filter) {
+      public function addFilter(fDOMFilter $filter) {
          $this->filterList[$filter->getNamespace()] = $filter;
       }
 
@@ -124,7 +124,7 @@ namespace TheSeer\fDOM {
        */
       public function cleanup(DOMNode $node=null) {
          if (empty($this->filterList)) {
-            throw new fDomException('No filter defined for cleanup', fException::ERROR);
+            throw new fDOMException('No filter defined for cleanup', fException::ERROR);
          }
          return $this->cleanupNode(is_null($node) ? $this->dom->documentElement : $node);
       }
@@ -180,12 +180,12 @@ namespace TheSeer\fDOM {
       /**
        * Helper to loop over attributes
        *
-       * @param fDomNode   $node   Domnode to process attributes of
-       * @param fDomFilter $filter Instance of filter
+       * @param fDOMNode   $node   Domnode to process attributes of
+       * @param fDOMFilter $filter Instance of filter
        *
        * @return void
        */
-      private function processAttributes(fDomNode $node, fDomFilter $filter) {
+      private function processAttributes(fDOMNode $node, fDOMFilter $filter) {
          // loop attributes
          foreach($node->attributes as $attr) {
 
@@ -227,12 +227,12 @@ namespace TheSeer\fDOM {
       /**
        * Helper to loop over childnodes of given node
        *
-       * @param fDomNode   $node   Node to process children of
-       * @param fDomFilter $filter Instance of current fDomFilter
+       * @param fDOMNode   $node   Node to process children of
+       * @param fDOMFilter $filter Instance of current fDOMFilter
        *
        * @return void
        */
-      private function processChildNodes(fDomNode $node, fDomFilter $filter) {
+      private function processChildNodes(fDOMNode $node, fDOMFilter $filter) {
 
          // remove childnodes if empty is enforced
          if ($filter->isEmpty) {
@@ -281,7 +281,7 @@ namespace TheSeer\fDOM {
    // ===============================================================================================================
 
    /**
-    * fDomFilterNode class
+    * fDOMFilterNode class
     *
     * This class provides some general helper functions for actual filter classes
     *
@@ -291,7 +291,7 @@ namespace TheSeer\fDOM {
     * @author   Arne Blankerts <theseer@fcms.de>
     *
     */
-   abstract class fDomFilterNode {
+   abstract class fDOMFilterNode {
 
       public $attributes  = array();
       public $children    = array();

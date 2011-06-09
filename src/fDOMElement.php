@@ -65,6 +65,18 @@ namespace TheSeer\fDOM {
       }
 
       /**
+       * Forward to fDomDocument->queryOne()
+       *
+       * @param string    $q   XPath to use
+       * @param \DOMNode  $ctx \DOMNode to overwrite context
+       *
+       * @return DomNodeList
+       */
+      public function queryOne($q, \DOMNode $ctx = null) {
+         return $this->ownerDocument->queryOne($q, $ctx ? $ctx : $this);
+      }
+
+      /**
        * Parse and append XML String to node
        *
        * @param String $str string to process
