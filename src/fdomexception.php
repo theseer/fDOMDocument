@@ -55,6 +55,7 @@ namespace TheSeer\fDOM {
       const RegistrationFailed = 5;
       const NoDOMXPath         = 6;
       const UnboundPrefix      = 7;
+      const DeprecatedMethod   = 8;
 
       /**
        * List of libxml error objects
