@@ -316,6 +316,16 @@ namespace TheSeer\fDOM {
          return $node;
 
       }
+      
+      /**
+       * Always throws an exception, createElementNS() should be used instead.
+       *
+       * @return void
+       */
+      public function createElement($name, $value = '')
+      {
+         throw new fDOMException("Always use createElementNS() method", fDOMException::DeprecatedMethod);
+      }
 
    } // fDOMDocument
 
