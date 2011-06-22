@@ -41,32 +41,29 @@
 
 namespace TheSeer\fDOM {
 
-    /**
-     * fDomNode
-     *
-     * @category  PHP
-     * @package   TheSeer\fDOM
-     * @author    Arne Blankerts <arne@blankerts.de>
-     * @access    public
-     *
-     */
-    class fDOMNode extends \DOMNode {
+   /**
+    * fDomNode
+    *
+    * @category  PHP
+    * @package   TheSeer\fDOM
+    * @author    Arne Blankerts <arne@blankerts.de>
+    * @access    public
+    *
+    */
+   class fDOMNode extends \DOMNode {
 
-        /**
-         * Check if current node and given one are in the same document
-         *
-         * @param DomNode $node Node to compare with
-         *
-         * @return boolean true on match, false if they differ
-         *
-         */
-        public function inSameDocument($node) {
-            if ($node instanceof \DOMDocument) {
-                return $this->ownerDocument->isSameNode($node);
-            }
-            return ($this->ownerDocument->isSameNode($node->ownerDocument));
-        }
+      /**
+       * Check if current node and given one are in the same document
+       *
+       * @param DomNode $node Node to compare with
+       *
+       * @return boolean true on match, false if they differ
+       *
+       */
+      public function inSameDocument($node) {
+         return ($this->ownerDocument->isSameNode($node->ownerDocument));
+      }
 
-    } // fDOMNode
+   } // fDOMNode
 
 }

@@ -41,46 +41,43 @@
 
 namespace TheSeer\fDOM {
 
-    /**
-     * fDOMDocumentFragment
-     *
-     * @category  PHP
-     * @package   TheSeer\fDOM
-     * @author    Arne Blankerts <arne@blankerts.de>
-     * @access    public
-     *
-     */
-    class fDOMDocumentFragment extends \DOMDocumentFragment {
+   /**
+    * fDOMDocumentFragment
+    *
+    * @category  PHP
+    * @package   TheSeer\fDOM
+    * @author    Arne Blankerts <arne@blankerts.de>
+    * @access    public
+    *
+    */
+   class fDOMDocumentFragment extends \DOMDocumentFragment {
 
-        /**
-         * Wrapper to standard method with exception support
-         *
-         * @param string $str Data string to parse and append
-         *
-         * @return boolean true on success
-         */
-        public function appendXML($str) {
-            if (!parent::appendXML($str)) {
-                throw new fDOMException('Appending xml string failed', fDOMException::ParseError);
-            }
-            return true;
-        }
+      /**
+       * Wrapper to standard method with exception support
+       *
+       * @param string $str Data string to parse and append
+       *
+       * @return boolean true on success
+       */
+      public function appendXML($str) {
+         if (!parent::appendXML($str)) {
+            throw new fDOMException('Appending xml string failed', fDOMException::ParseError);
+         }
+         return true;
+      }
 
-        /**
-         * Check if current node and given one are in the same document
-         *
-         * @param DOMNode $node Node to compare with
-         *
-         * @return boolean true on match, false if they differ
-         *
-         */
-        public function inSameDocument($node) {
-            if ($node instanceof \DOMDocument) {
-                return $this->ownerDocument->isSameNode($node);
-            }
-            return $this->ownerDocument->isSameNode($node->ownerDocument);
-        }
+      /**
+       * Check if current node and given one are in the same document
+       *
+       * @param DOMNode $node Node to compare with
+       *
+       * @return boolean true on match, false if they differ
+       *
+       */
+      public function inSameDocument($node) {
+         return ($this->ownerDocument->isSameNode($node->ownerDocument));
+      }
 
-    } // fDOMDocumentFragment
+   } // fDOMDocumentFragment
 
 }
