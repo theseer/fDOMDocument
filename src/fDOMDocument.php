@@ -42,7 +42,10 @@
 namespace TheSeer\fDOM {
 
     /**
-     * fDOMDocument
+     * fDOMDocument extension to PHP's DOMDocument.
+     * This class adds various convenience methods to simplify APIs
+     * It is set to final since further extending it would even more
+     * break the Object structure after use of registerNodeClass.
      *
      * @category  PHP
      * @package   TheSeer\fDOM
@@ -108,11 +111,12 @@ namespace TheSeer\fDOM {
 
         /**
          * Wrapper to DOMDocument load with exception handling
+         * Returns true on success to satisfy the compatibilty of the original DOM Api
          *
          * @param string  $fname   File to load
          * @param integer $options LibXML Flags to pass
          *
-         * @return void
+         * @return boolean
          */
         public function load($fname, $options = LIBXML_NONET) {
             $this->xp = null;
@@ -120,15 +124,17 @@ namespace TheSeer\fDOM {
             if (!$tmp) {
                 throw new fDOMException("loading file '$fname' failed.", fDOMException::LoadError);
             }
+            return true;
         }
 
         /**
          * Wrapper to DOMDocument loadXML with exception handling
+         * Returns true on success to satisfy the compatibilty of the original DOM Api
          *
          * @param string  $source  XML source code
          * @param integer $options LibXML option flags
          *
-         * @return mixed if called statically fDOMDocument otherwise boolean true
+         * @return boolean
          */
         public function loadXML($source, $options = LIBXML_NONET) {
             $this->xp = null;
@@ -136,14 +142,16 @@ namespace TheSeer\fDOM {
             if (!$tmp) {
                 throw new fDOMException('parsing string failed', fDOMException::ParseError);
             }
+            return true;
         }
 
         /**
-         * Wrapper to DOMDocument loadHTMLFile with exception handling
+         * Wrapper to DOMDocument loadHTMLFile with exception handling.
+         * Returns true on success to satisfy the compatibilty of the original DOM Api
          *
          * @param string $fname html file to load
          *
-         * @return mixed if called statically fDOMDocument otherwise boolean true
+         * @return boolean
          */
         public function loadHTMLFile($fname) {
             $this->xp = null;
@@ -151,14 +159,16 @@ namespace TheSeer\fDOM {
             if (!$tmp) {
                 throw new fDOMException("loading html file '$fname' failed", fDOMException::LoadError);
             }
+            return true;
         }
 
         /**
          * Wrapper to DOMDocument loadHTML with exception handling
+         * Returns true on success to satisfy the compatibilty of the original DOM Api
          *
          * @param string $source html source code
          *
-         * @return mixed if called statically fDOMDocument otherwise boolean true
+         * @return boolean
          */
         public function loadHTML($source) {
             $this->xp = null;
@@ -166,6 +176,7 @@ namespace TheSeer\fDOM {
             if (!$tmp) {
                 throw new fDOMException('parsing html string failed', fDOMException::ParseError);
             }
+            return true;
         }
 
         /**
@@ -287,6 +298,14 @@ namespace TheSeer\fDOM {
             return $rc;
         }
 
+        /**
+         * Perform an xpath query and return only the 1st match
+         *
+         * @param String   $q   query string containing xpath
+         * @param DOMNode  $ctx (optional) Context DOMNode
+         *
+         * @return \DOMNode
+         */
         public function queryOne($q, \DOMNode $ctx) {
             return $this->query($q, $ctx)->item(0);
         }
