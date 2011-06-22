@@ -304,7 +304,7 @@ namespace TheSeer\fDOM {
          * @param String   $q   query string containing xpath
          * @param DOMNode  $ctx (optional) Context DOMNode
          *
-         * @return \DOMNode
+         * @return fDOMNode
          */
         public function queryOne($q, \DOMNode $ctx) {
             return $this->query($q, $ctx)->item(0);
@@ -328,7 +328,15 @@ namespace TheSeer\fDOM {
             $this->prefix[$prefix] = $uri;
         }
 
-
+        /**
+         * Create a new element in namespace defined by given prefix
+         *
+         * @param $prefix   Namespace prefix for node to create
+         * @param $name     Name of not element to create
+         * @param $content  Optional content to be set
+         *
+         * @return fDOMElement Reference to created fDOMElement
+         */
         public function createElementPrefix($prefix, $name, $content = null) {
             if (!isset($this->prefixes[$prefix])) {
                 throw new fDOMException("'$prefix' not bound", fDOMException::UnboundPrefix);
@@ -338,7 +346,6 @@ namespace TheSeer\fDOM {
                 $node->nodeValue = $content;
             }
             return $node;
-
         }
 
     } // fDOMDocument
