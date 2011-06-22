@@ -17,10 +17,10 @@
   <email>arne@blankerts.de</email>
   <active>yes</active>
  </lead>
- <date>2011-02-27</date>
+ <date>2011-06-23</date>
  <version>
-  <release>1.0.0</release>
-  <api>1.0.0</api>
+  <release>1.1.0</release>
+  <api>1.1.0</api>
  </version>
  <stability>
   <release>stable</release>
@@ -33,13 +33,13 @@
    <dir name="TheSeer">
     <dir name="fDOMDocument">
        <file name="autoload.php" role="php" />
-       <file name="fdomdocumentfragment.php" role="php" />
-       <file name="fdomdocument.php" role="php" />
-       <file name="fdomelement.php" role="php" />
-       <file name="fdomexception.php" role="php" />
-       <file name="fdomfilter.php" role="php" />
-       <file name="fdomnode.php" role="php" />
-       <dir name="fdomfilter">
+       <file name="fDOMDocumentFragment.php" role="php" />
+       <file name="fDOMDocument.php" role="php" />
+       <file name="fDOMElement.php" role="php" />
+       <file name="fDOMException.php" role="php" />
+       <file name="fDOMFilter.php" role="php" />
+       <file name="fDOMNode.php" role="php" />
+       <dir name="fDOMFilter">
          <file name="xhtml.php" role="php" />
        </dir>
     </dir>
