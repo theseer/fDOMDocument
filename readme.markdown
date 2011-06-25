@@ -8,13 +8,13 @@ and shortcuts for convinience and to simplify the usage of DOM.
 Requirements
 ------------
 
-    PHP: 5.3.0
+    PHP: 5.3.3 (5.3.0-5.3.2 had serious issues with spl stacked autoloaders)
     Extensions: dom, libxml
 
 Usage
 -----
 
-Simply require/include the autoload.php supplied and you can start using fDOMDocument as a 
+Simply require/include the autoload.php supplied and you can start using fDOMDocument as a
 drop in replacement for DOMDocument.
 
 Usage Samples
@@ -22,14 +22,14 @@ Usage Samples
 
     <?php
 
-    $dom = new fDOMDOcument();
+    $dom = new TheSeer\fDOM\fDOMDOcument();
     try {
 	$dom->loadXML('<?xml version="1.0" ?><root><child name="foo" /></root>');
     } catch (fDOMException $e) {
 	die($e);
     }
 
-    $child = $dom->query('//child')->item(0);
+    $child = $dom->queryOne('//child');
     print_r($child->getAttribute('name'));
     print_r($child->getAttribute('missing','DefaultValue'));
 
