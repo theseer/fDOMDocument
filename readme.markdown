@@ -18,7 +18,7 @@ Simply require/include the autoload.php supplied and you can start using fDOMDoc
 drop in replacement for DOMDocument.
 
 Usage Samples
---------------
+-------------
 
     <?php
 
@@ -34,3 +34,22 @@ Usage Samples
     print_r($child->getAttribute('missing','DefaultValue'));
 
     ?>
+    
+    
+Changelog
+---------
+1.1.0   - Renamed files to mimic classname cases
+        - Fixed inSameDocument to support DOMDocument as well as DOMNodes
+        - Added fDOMXPath class providing queryOne(), qoute() and prepare()
+        - Adjusted forwarders in fDOMDocument to make use of new object
+        - Fixed various return values to statically return true for compatibility with original API
+        - Applied Workaround to fix potential problems with lost references to instances of fDOMDocument
+        - Support registerPHPFunctions
+        - Bump Copyright
+        - Added missing docblocks
+        
+1.0.2   - Indenting and typo fixes, minor bugfixes
+
+1.0.1   - Bugfix: typehints corrected
+
+1.0.0   - Initial release
