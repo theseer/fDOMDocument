@@ -309,6 +309,13 @@ namespace TheSeer\fDOM {
         }
 
 
+        /**
+         * Forwarder to fDOMXPath's prepare method allowing for easy and secure
+         * placeholder replacement comparable to sql's prepared statements
+         * .
+         * @param string $xpath    String containing xpath with :placeholder markup
+         * @param array  $valueMap Array containing keys (:placeholder) and value pairs to be quoted
+         */
         public function prepareQuery($xpath, array $valueMap) {
             if (is_null($this->xp)) {
                 $this->getDOMXPath();
