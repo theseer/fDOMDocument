@@ -58,7 +58,7 @@ namespace TheSeer\fDOM {
         /**
          * XPath Object instance
          *
-         * @var \DOMXPath
+         * @var fDOMXPath
          */
         private $xp = null;
 
@@ -254,7 +254,7 @@ namespace TheSeer\fDOM {
          */
         public function getDOMXPath() {
             if (is_null($this->xp)) {
-                $this->xp = new \DOMXPath($this);
+                $this->xp = new fDOMXPath($this);
             }
             if (!$this->xp) {
                 throw new fDOMException('creating DOMXPath object failed.', fDOMException::NoDOMXPath);
@@ -290,12 +290,7 @@ namespace TheSeer\fDOM {
             if (is_null($this->xp)) {
                 $this->getDOMXPath();
             }
-            libxml_clear_errors();
-            $rc = $this->xp->evaluate($q, ($ctx instanceof \DOMNode) ? $ctx : $this->documentElement);
-            if (libxml_get_last_error()) {
-                throw new fDOMException('evaluating xpath expression failed.', fDOMException::QueryError);
-            }
-            return $rc;
+            return $this->xp->evaluate($q,$ctx);
         }
 
         /**
@@ -307,7 +302,18 @@ namespace TheSeer\fDOM {
          * @return fDOMNode
          */
         public function queryOne($q, \DOMNode $ctx) {
-            return $this->query($q, $ctx)->item(0);
+            if (is_null($this->xp)) {
+                $this->getDOMXPath();
+            }
+            return $this->xp->queryOne($q, $ctx);
+        }
+
+
+        public function prepareQuery($xpath, array $valueMap) {
+            if (is_null($this->xp)) {
+                $this->getDOMXPath();
+            }
+            return $this->xp->prepare($xpath, $valueMap);
         }
 
         /**
@@ -326,6 +332,23 @@ namespace TheSeer\fDOM {
                 throw new fDOMException("Registering namespace '$uri' with prefix '$prefix' failed.", fDOMException::RegistrationFailed);
             }
             $this->prefix[$prefix] = $uri;
+        }
+
+        /**
+         * Forward to DOMXPath->registerPHPFunctions()
+         *
+         * @param mixed $restrict Array of function names or string with functionname to restrict callabilty to
+         *
+         * @return void
+         */
+        public function registerPHPFunctions($restrict = null) {
+            if (is_null($this->xp)) {
+                $this->getDOMXPath();
+            }
+            $this->xp->registerPHPFunctions($restrict);
+            if (libxml_get_last_error()) {
+                throw new fDOMException("Registering php functions failed.", fDOMException::RegistrationFailed);
+            }
         }
 
         /**
