@@ -71,7 +71,12 @@ namespace TheSeer\fDOM {
 
         public function query($q, \DOMNode $ctx = null, $registerNodeNS = true) {
             libxml_clear_errors();
-            $rc = parent::query($q, ($ctx instanceof \DOMNode) ? $ctx : $this->doc->documentElement, $registerNodeNS);
+            if (version_compare(PHP_VERSION, '5.3.3', '<')) {
+                $rc = parent::query($q, ($ctx instanceof \DOMNode) ? $ctx : $this->doc->documentElement);
+            } else {
+                $rc = parent::query($q, ($ctx instanceof \DOMNode) ? $ctx : $this->doc->documentElement, $registerNodeNS);
+            }
+
             if (libxml_get_last_error()) {
                 throw new fDOMException('evaluating xpath expression failed.', fDOMException::QueryError);
             }
@@ -80,7 +85,11 @@ namespace TheSeer\fDOM {
 
         public function evaluate($q, \DOMNode $ctx = null, $registerNodeNS = true) {
             libxml_clear_errors();
-            $rc = parent::evaluate($q, ($ctx instanceof \DOMNode) ? $ctx : $this->doc->documentElement, $registerNodeNS);
+            if (version_compare(PHP_VERSION, '5.3.3', '<')) {
+                $rc = parent::evaluate($q, ($ctx instanceof \DOMNode) ? $ctx : $this->doc->documentElement);
+            } else {
+                $rc = parent::evaluate($q, ($ctx instanceof \DOMNode) ? $ctx : $this->doc->documentElement, $registerNodeNS);
+            }
             if (libxml_get_last_error()) {
                 throw new fDOMException('evaluating xpath expression failed.', fDOMException::QueryError);
             }

@@ -55,27 +55,27 @@ namespace TheSeer\fDOM {
         /**
          * Forward to fDomDocument->query()
          *
-         * @param string   $q   XPath to use
-         * @param \DOMNode $ctx \DOMNode to overwrite context
-         * @param Array    $map (optional) Map of placeholders to safely replace with escaped values
+         * @param string   $q               XPath to use
+         * @param \DOMNode $ctx             \DOMNode to overwrite context
+         * @param boolean  $registerNodeNS  Register flag pass thru
          *
          * @return DomNodeList
          */
-        public function query($q, \DOMNode $ctx = null) {
-            return $this->ownerDocument->query($q, $ctx ? $ctx : $this);
+        public function query($q, \DOMNode $ctx = null, $registerNodeNS = true) {
+            return $this->ownerDocument->query($q, $ctx ? $ctx : $this, $registerNodeNS);
         }
 
         /**
          * Forward to fDomDocument->queryOne()
          *
-         * @param string   $q   XPath to use
-         * @param \DOMNode $ctx (optional) \DOMNode to overwrite context
-         * @param Array    $map (optional) Map of placeholders to safely replace with escaped values
+         * @param string   $q               XPath to use
+         * @param \DOMNode $ctx             (optional) \DOMNode to overwrite context
+         * @param boolean  $registerNodeNS  Register flag pass thru
          *
          * @return mixed
          */
-        public function queryOne($q, \DOMNode $ctx = null) {
-            return $this->ownerDocument->queryOne($q, $ctx ? $ctx : $this);
+        public function queryOne($q, \DOMNode $ctx = null, $registerNodeNS = true) {
+            return $this->ownerDocument->queryOne($q, $ctx ? $ctx : $this, $registerNodeNS);
         }
 
         /**

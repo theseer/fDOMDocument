@@ -283,14 +283,15 @@ namespace TheSeer\fDOM {
          *
          * @param String   $q   query string containing xpath
          * @param DOMNode  $ctx (optional) Context DOMNode
+         * @param boolean  $registerNodeNS  Register flag pass thru
          *
          * @return \DOMNodeList
          */
-        public function query($q, \DOMNode $ctx = null) {
+        public function query($q, \DOMNode $ctx = null, $registerNodeNS = true) {
             if (is_null($this->xp)) {
                 $this->getDOMXPath();
             }
-            return $this->xp->evaluate($q,$ctx);
+            return $this->xp->evaluate($q, $ctx, $registerNodeNS);
         }
 
         /**
@@ -298,14 +299,15 @@ namespace TheSeer\fDOM {
          *
          * @param String   $q   query string containing xpath
          * @param DOMNode  $ctx (optional) Context DOMNode
+         * @param boolean  $registerNodeNS  Register flag pass thru
          *
          * @return fDOMNode
          */
-        public function queryOne($q, \DOMNode $ctx) {
+        public function queryOne($q, \DOMNode $ctx = null, $registerNodeNS = true) {
             if (is_null($this->xp)) {
                 $this->getDOMXPath();
             }
-            return $this->xp->queryOne($q, $ctx);
+            return $this->xp->queryOne($q, $ctx, $registerNodeNS);
         }
 
 
