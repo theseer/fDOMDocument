@@ -378,6 +378,21 @@ namespace TheSeer\fDOM {
             return $node;
         }
 
+        /**
+         * Check if the given node is in the same document
+         *
+         * @param \DOMNode $node Node to compare with
+         *
+         * @return boolean true on match, false if they differ
+         *
+         */
+        public function inSameDocument(\DOMNode $node) {
+            if ($node instanceof \DOMDocument) {
+                return $this->isSameNode($node);
+            }
+            return $this->isSameNode($node->ownerDocument);
+        }
+
     } // fDOMDocument
 
 }

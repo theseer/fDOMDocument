@@ -67,18 +67,15 @@ namespace TheSeer\fDOM {
         }
 
         /**
-         * Check if current node and given one are in the same document
+         * Check if the given node is in the same document
          *
-         * @param DOMNode $node Node to compare with
+         * @param \DOMNode $node Node to compare with
          *
          * @return boolean true on match, false if they differ
          *
          */
-        public function inSameDocument($node) {
-            if ($node instanceof \DOMDocument) {
-                return $this->ownerDocument->isSameNode($node);
-            }
-            return $this->ownerDocument->isSameNode($node->ownerDocument);
+        public function inSameDocument(\DOMNode $node) {
+            return $this->ownerDocument->inSameDocument($node);
         }
 
     } // fDOMDocumentFragment
