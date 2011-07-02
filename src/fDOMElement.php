@@ -159,7 +159,7 @@ namespace TheSeer\fDOM {
         /**
          * Wrapper to DomElement->getAttributeNS with default value option
          *
-         * Note: A set but emptry attribute does NOT trigger use of the default
+         * Note: A set but empty attribute does NOT trigger use of the default
          *
          * @param string $ns      Namespace of attribute
          * @param string $attr    Attribute to access
@@ -169,6 +169,37 @@ namespace TheSeer\fDOM {
          */
         public function getAttributeNS($ns, $attr, $default='') {
             return $this->hasAttributeNS($ns, $attr) ? parent::getAttributeNS($ns, $attr) : $default;
+        }
+        
+        /**
+         * Helper to add multiple attributes to an element
+         * 
+         * @param array  $attr    Attributes to add
+         * 
+         * @return array List with references to created DOMAttr
+         */
+        public function setAttributes(array $attr) {
+            $attList = array();
+            foreach($attr as $name => $value) {
+               $attList[] = parent::setAttribute($name, $value);
+            }
+            
+            return $attList;
+        }
+        
+        /**
+         * Helper to add multiple attributes with the given namespace and prefix
+         * 
+         * @param string $ns       Namespace of attribute
+         * @param string $prefix   Namespace prefix for attribute to create
+         * @param array  $attr     Attributes to add
+         * 
+         * @return void
+         */
+        public function setAttributesNS($ns, $prefix, array $attr) {
+           foreach($attr as $name => $value) {
+              parent::setAttributeNS($ns, $prefix.':'.$name, $value);
+           }
         }
 
         /**
