@@ -181,7 +181,7 @@ namespace TheSeer\fDOM {
         public function setAttributes(array $attr) {
             $attList = array();
             foreach($attr as $name => $value) {
-               $attList[] = parent::setAttribute($name, $value);
+               $attList[] = $this->setAttribute($name, $value);
             }
             
             return $attList;
@@ -198,7 +198,7 @@ namespace TheSeer\fDOM {
          */
         public function setAttributesNS($ns, $prefix, array $attr) {
            foreach($attr as $name => $value) {
-              parent::setAttributeNS($ns, $prefix.':'.$name, $value);
+              $this->setAttributeNS($ns, $prefix.':'.$name, $value);
            }
         }
 
