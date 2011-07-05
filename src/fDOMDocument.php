@@ -340,7 +340,7 @@ namespace TheSeer\fDOM {
             if (!$this->xp->registerNamespace($prefix, $uri)) {
                 throw new fDOMException("Registering namespace '$uri' with prefix '$prefix' failed.", fDOMException::RegistrationFailed);
             }
-            $this->prefix[$prefix] = $uri;
+            $this->prefixes[$prefix] = $uri;
         }
 
         /**
