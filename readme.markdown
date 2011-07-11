@@ -38,6 +38,10 @@ Usage Samples
     
 Changelog
 ---------
+1.2.0   - Changed fException to be more compatible with standard exceptions
+          by adding a switch to get full info by getMessage()
+        - Merged setAttributes() and setAttributesNS() methods from Andreas
+        - Fixed internal registerNamespace variable mixup
 1.1.0   - Renamed files to mimic classname cases
         - Fixed inSameDocument to support DOMDocument as well as DOMNodes
         - Added fDOMXPath class providing queryOne(), qoute() and prepare()
