@@ -64,7 +64,14 @@ namespace TheSeer\fDOM {
       private $errorList;
 
       /**
-       * Error message
+       * Flag wheter getMessage() should return full (e.g. with details) message or only exception message
+       *
+       * @var boolean
+       */
+      private $fullFlag = false;
+
+      /**
+       * Full Error message
        *
        * @var string
        */
@@ -83,7 +90,7 @@ namespace TheSeer\fDOM {
          libxml_clear_errors();
          parent :: __construct($message, $code, $chain);
 
-         $this->fullMessage = 'fDOMException: '.$message."\n\nDetails as follows:\n";
+         $this->fullMessage = $message."\n\n";
 
          foreach ($this->errorList as $error) {
             // hack, skip "attempt to load external pseudo error"
@@ -132,13 +139,22 @@ namespace TheSeer\fDOM {
       }
 
       /**
-       * Forwarder to fExceptions handle error method with local fullmessage
+       * Toggle wehter getMessage() should return full or only excepotion message
+       *
+       * @param boolean $full Flag to enable or disable full message output
        *
        * @return void
        */
-      public function handleError() {
-         $this->message = $this->fullMessage;
-         parent::handleError();
+      public function toggleFullMessage($full = true) {
+         $this->fullFlag = $full;
+      }
+
+      /**
+       * (non-PHPdoc)
+       * @see Exception::getMessage()
+       */
+      public function getMessage() {
+          return $this->fullFlag ? $this->fullMessage : $this->message;
       }
 
       /**
