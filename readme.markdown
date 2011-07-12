@@ -38,6 +38,8 @@ Usage Samples
     
 Changelog
 ---------
+1.2.1   - Changed fDOMDocument to be no longer final, use lsb to lookup actual class in constructor.
+          This should fix test/mock issues.
 1.2.0   - Changed fException to be more compatible with standard exceptions
           by adding a switch to get full info by getMessage()
         - Merged setAttributes() and setAttributesNS() methods from Andreas
