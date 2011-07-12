@@ -53,7 +53,7 @@ namespace TheSeer\fDOM {
      * @access    public
      *
      */
-    final class fDOMDocument extends \DOMDocument {
+    class fDOMDocument extends \DOMDocument {
 
         /**
          * XPath Object instance
@@ -85,7 +85,7 @@ namespace TheSeer\fDOM {
             libxml_use_internal_errors(true);
             $rc = parent::__construct($version, $encoding);
 
-            $this->registerNodeClass('\DOMDocument', 'TheSeer\fDOM\fDOMDocument');
+            $this->registerNodeClass('\DOMDocument', get_called_class());
             $this->registerNodeClass('\DOMNode', 'TheSeer\fDOM\fDOMNode');
             $this->registerNodeClass('\DOMElement', 'TheSeer\fDOM\fDOMElement');
             $this->registerNodeClass('\DOMDocumentFragment', 'TheSeer\fDOM\fDOMDocumentFragment');
