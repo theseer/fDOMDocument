@@ -37,135 +37,136 @@
 
 namespace TheSeer\fDOM {
 
-   /**
-    * fDOMException
-    *
-    * @category  PHP
-    * @package   TheSeer\fDOM
-    * @author    Arne Blankerts <arne@blankerts.de>
-    * @access    public
-    *
-    */
-   class fDOMException extends \Exception {
+    /**
+     * fDOMException
+     *
+     * @category  PHP
+     * @package   TheSeer\fDOM
+     * @author    Arne Blankerts <arne@blankerts.de>
+     * @access    public
+     *
+     */
+    class fDOMException extends \Exception {
 
-      const LoadError          = 1;
-      const ParseError         = 2;
-      const SaveError          = 3;
-      const QueryError         = 4;
-      const RegistrationFailed = 5;
-      const NoDOMXPath         = 6;
-      const UnboundPrefix      = 7;
+        const LoadError          = 1;
+        const ParseError         = 2;
+        const SaveError          = 3;
+        const QueryError         = 4;
+        const RegistrationFailed = 5;
+        const NoDOMXPath         = 6;
+        const UnboundPrefix      = 7;
 
-      /**
-       * List of libxml error objects
-       *
-       * @var array
-       */
-      private $errorList;
+        /**
+         * List of libxml error objects
+         *
+         * @var array
+         */
+        private $errorList;
 
-      /**
-       * Flag wheter getMessage() should return full (e.g. with details) message or only exception message
-       *
-       * @var boolean
-       */
-      private $fullFlag = false;
+        /**
+         * Flag wheter getMessage() should return full (e.g. with details) message or only exception message
+         *
+         * @var boolean
+         */
+        private $fullFlag = false;
 
-      /**
-       * Full Error message
-       *
-       * @var string
-       */
-      private $fullMessage = null;
+        /**
+         * Full Error message
+         *
+         * @var string
+         */
+        private $fullMessage = null;
 
-      /**
-       * Constructor
-       *
-       * @param string  $message Exception message
-       * @param integer $code    Exception code
-       *
-       * @return void
-       */
-      public function __construct($message, $code = 0, $chain = NULL) {
-         $this->errorList = libxml_get_errors();
-         libxml_clear_errors();
-         parent :: __construct($message, $code, $chain);
 
-         $this->fullMessage = $message."\n\n";
+        /**
+         * Short Error Message
+         *
+         * @var string
+         */
+        private $shortMessage = null;
 
-         foreach ($this->errorList as $error) {
-            // hack, skip "attempt to load external pseudo error"
-            if ($error->code=='1543') continue;
+        /**
+         * Constructor
+         *
+         * @param string  $message Exception message
+         * @param integer $code    Exception code
+         *
+         * @return void
+         */
+        public function __construct($message, $code = 0, $chain = NULL) {
+            $this->shortMessage = $message;
+            $this->errorList = libxml_get_errors();
+            libxml_clear_errors();
+            parent :: __construct($message, $code, $chain);
 
-            if (empty($error->file)) {
-               $this->fullMessage .= '[XML-STRING] ';
-            } else {
-               $this->fullMessage .= '['.$error->file.'] ';
+            $this->fullMessage = $message."\n\n";
+
+            foreach ($this->errorList as $error) {
+                // hack, skip "attempt to load external pseudo error"
+                if ($error->code=='1543') continue;
+
+                if (empty($error->file)) {
+                    $this->fullMessage .= '[XML-STRING] ';
+                } else {
+                    $this->fullMessage .= '['.$error->file.'] ';
+                }
+
+                $this->fullMessage .= '[Line: '.$error->line.' - Column: '.$error->column.'] ';
+
+                switch ($error->level) {
+                    case LIBXML_ERR_WARNING:
+                        $this->fullMessage .= "Warning $error->code: ";
+                        break;
+                    case LIBXML_ERR_ERROR:
+                        $this->fullMessage .= "Error $error->code: ";
+                        break;
+                    case LIBXML_ERR_FATAL:
+                        $this->fullMessage .= "Fatal Error $error->code: ";
+                        break;
+                }
+
+                $this->fullMessage .= str_replace("\n", '', $error->message)."\n";
             }
+        }
 
-            $this->fullMessage .= '[Line: '.$error->line.' - Column: '.$error->column.'] ';
+        /**
+         * Accessor to fullMessage
+         *
+         * @return string
+         */
+        public function getFullMessage() {
+            return $this->fullMessage;
+        }
 
-            switch ($error->level) {
-               case LIBXML_ERR_WARNING:
-                  $this->fullMessage .= "Warning $error->code: ";
-                  break;
-               case LIBXML_ERR_ERROR:
-                  $this->fullMessage .= "Error $error->code: ";
-                  break;
-               case LIBXML_ERR_FATAL:
-                  $this->fullMessage .= "Fatal Error $error->code: ";
-                  break;
-            }
+        /**
+         * Accessor to errorList objets
+         *
+         * @return array
+         */
+        public function getErrorList() {
+            return $this->errorList;
+        }
 
-            $this->fullMessage .= str_replace("\n", '', $error->message)."\n";
-         }
-      }
+        /**
+         * Toggle wehter getMessage() should return full or only excepotion message
+         *
+         * @param boolean $full Flag to enable or disable full message output
+         *
+         * @return void
+         */
+        public function toggleFullMessage($full = true) {
+            $this->message = $full ? $this->fullMessage : $this->shortMessage;
+        }
 
-      /**
-       * Accessor to fullMessage
-       *
-       * @return string
-       */
-      public function getFullMessage() {
-         return $this->fullMessage;
-      }
+        /**
+         * Magic method for string context
+         *
+         * @return string
+         */
+        public function __toString() {
+            return $this->fullMessage;
+        }
 
-      /**
-       * Accessor to errorList objets
-       *
-       * @return array
-       */
-      public function getErrorList() {
-         return $this->errorList;
-      }
-
-      /**
-       * Toggle wehter getMessage() should return full or only excepotion message
-       *
-       * @param boolean $full Flag to enable or disable full message output
-       *
-       * @return void
-       */
-      public function toggleFullMessage($full = true) {
-         $this->fullFlag = $full;
-      }
-
-      /**
-       * (non-PHPdoc)
-       * @see Exception::getMessage()
-       */
-      public function getMessage() {
-          return $this->fullFlag ? $this->fullMessage : $this->message;
-      }
-
-      /**
-       * Magic method for string context
-       *
-       * @return string
-       */
-      public function __toString() {
-         return $this->fullMessage;
-      }
-
-   } // fDOMException
+    } // fDOMException
 
 }
