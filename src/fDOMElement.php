@@ -170,35 +170,84 @@ namespace TheSeer\fDOM {
         public function getAttributeNS($ns, $attr, $default='') {
             return $this->hasAttributeNS($ns, $attr) ? parent::getAttributeNS($ns, $attr) : $default;
         }
-        
+
+        /**
+         * Wrapper to DOMElement::setAttribute with additional entities support
+         *
+         * @param string  $attr          Attribute name to set
+         * @param string  $value         Value to set attribute to
+         * @param boolean $keepEntitites Flag to signale if entities should be kept
+         *
+         * @return fDOMAttr
+         *
+         * @see DOMElement::setAttribute()
+         */
+        public function setAttribute($attr, $value, $keepEntities=false) {
+            if ($keepEntities === true) {
+                $attrNode = $this->ownerDocument->createAttribute($attr);
+                if (!$attrNode) {
+                   throw new fDOMException("Setting attribute '$attr' failed.", fDOMException::SetFailedError);
+                }
+                $attrNode->value = $value;
+                $this->appendChild($attrNode);
+                return $attrNode;
+            }
+            return parent::setAttribute($attr, $value);
+        }
+
+        /**
+         * Wrapper to namespace aware DOMElement::setAttributeNS with additional entities support
+         *
+         * @param string  $ns            namespace attribute should be in
+         * @param string  $attr          Attribute name to set
+         * @param string  $value         Value to set attribute to
+         * @param boolean $keepEntitites Flag to signale if entities should be kept
+         *
+         * @return fDOMAttr
+         *
+         * @see DOMElement::setAttribute()
+         */
+        public function setAttributeNS($ns, $attr, $value, $keepEntities=false) {
+            if ($keepEntities === true) {
+                $attrNode = $this->ownerDocument->createAttributeNS($ns, $attr);
+                if (!$attrNode) {
+                   throw new fDOMException("Setting attribute '$attr' failed.", fDOMException::SetFailedError);
+                }
+                $attrNode->value = $value;
+                $this->appendChild($attrNode);
+                return $attrNode;
+            }
+            return parent::setAttributeNS($ns, $attr, $value);
+        }
+
         /**
          * Helper to add multiple attributes to an element
-         * 
+         *
          * @param array  $attr    Attributes to add
-         * 
+         *
          * @return array List with references to created DOMAttr
          */
-        public function setAttributes(array $attr) {
+        public function setAttributes(array $attr, $keepEntities=false) {
             $attList = array();
             foreach($attr as $name => $value) {
-               $attList[] = $this->setAttribute($name, $value);
+               $attList[] = $this->setAttribute($name, $value, $keepEntities);
             }
-            
+
             return $attList;
         }
-        
+
         /**
          * Helper to add multiple attributes with the given namespace and prefix
-         * 
+         *
          * @param string $ns       Namespace of attribute
          * @param string $prefix   Namespace prefix for attribute to create
          * @param array  $attr     Attributes to add
-         * 
+         *
          * @return void
          */
-        public function setAttributesNS($ns, $prefix, array $attr) {
+        public function setAttributesNS($ns, $prefix, array $attr, $keepEntities=false) {
            foreach($attr as $name => $value) {
-              $this->setAttributeNS($ns, $prefix.':'.$name, $value);
+              $this->setAttributeNS($ns, $prefix.':'.$name, $value, $keepEntities);
            }
         }
 
