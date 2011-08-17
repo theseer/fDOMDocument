@@ -192,7 +192,9 @@ namespace TheSeer\fDOM {
             if ($attr->namespaceURI!='' && $attr->namespaceURI!=$node->namespaceURI) {
 
                // ignore xml attributes
-               if ($attr->namespaceURI=='http://www.w3.org/XML/1998/namespace') continue;
+               if ($attr->namespaceURI=='http://www.w3.org/XML/1998/namespace') {
+                  continue;
+               }
 
                // custom namespace handling needed
                $custom = $this->filterList[$xmlns]->getInstanceForAttributes();
@@ -271,7 +273,9 @@ namespace TheSeer\fDOM {
 
             // process child itself - recurse on $child
             $rc = $this->cleanupNode($child);
-            if (!$rc) $node->removeChild($child);
+            if (!$rc) {
+               $node->removeChild($child);
+            }
 
          }
 

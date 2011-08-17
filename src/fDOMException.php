@@ -55,6 +55,7 @@ namespace TheSeer\fDOM {
         const RegistrationFailed = 5;
         const NoDOMXPath         = 6;
         const UnboundPrefix      = 7;
+        const SetFailedError     = 8;
 
         /**
          * List of libxml error objects
@@ -103,7 +104,9 @@ namespace TheSeer\fDOM {
 
             foreach ($this->errorList as $error) {
                 // hack, skip "attempt to load external pseudo error"
-                if ($error->code=='1543') continue;
+                if ($error->code=='1543') {
+                    continue;
+                }
 
                 if (empty($error->file)) {
                     $this->fullMessage .= '[XML-STRING] ';

@@ -97,7 +97,7 @@ namespace TheSeer\fDOM {
         }
 
         public function queryOne($q, \DOMNode $ctx = null, $registerNodeNS = true) {
-            $rc = $this->evaluate($q,$ctx, $registerNodeNS);
+            $rc = $this->evaluate($q, $ctx, $registerNodeNS);
             if ($rc instanceof \DOMNodelist) {
                 return $rc->item(0);
             }
