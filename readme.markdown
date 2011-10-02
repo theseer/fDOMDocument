@@ -22,6 +22,8 @@ Usage Samples
 
     <?php
 
+    require 'TheSeer/fDOMDocument/autoload.php';
+
     $dom = new TheSeer\fDOM\fDOMDOcument();
     try {
 	$dom->loadXML('<?xml version="1.0" ?><root><child name="foo" /></root>');
@@ -38,24 +40,26 @@ Usage Samples
     
 Changelog
 ---------
-1.2.1   - Changed fDOMDocument to be no longer final, use lsb to lookup actual class in constructor.
+1.2.1   * Changed fDOMDocument to be no longer final, use lsb to lookup actual class in constructor.
           This should fix test/mock issues.
-1.2.0   - Changed fException to be more compatible with standard exceptions
+
+1.2.0   * Changed fException to be more compatible with standard exceptions
           by adding a switch to get full info by getMessage()
-        - Merged setAttributes() and setAttributesNS() methods from Andreas
-        - Fixed internal registerNamespace variable mixup
-1.1.0   - Renamed files to mimic classname cases
-        - Fixed inSameDocument to support DOMDocument as well as DOMNodes
-        - Added fDOMXPath class providing queryOne(), qoute() and prepare()
-        - Adjusted forwarders in fDOMDocument to make use of new object
-        - Fixed various return values to statically return true for compatibility with original API
-        - Applied Workaround to fix potential problems with lost references to instances of fDOMDocument
-        - Support registerPHPFunctions
-        - Bump Copyright
-        - Added missing docblocks
+        * Merged setAttributes() and setAttributesNS() methods from Andreas
+        * Fixed internal registerNamespace variable mixup
+
+1.1.0   * Renamed files to mimic classname cases
+        * Fixed inSameDocument to support DOMDocument as well as DOMNodes
+        * Added fDOMXPath class providing queryOne(), qoute() and prepare()
+        * Adjusted forwarders in fDOMDocument to make use of new object
+        * Fixed various return values to statically return true for compatibility with original API
+        * Applied Workaround to fix potential problems with lost references to instances of fDOMDocument
+        * Support registerPHPFunctions
+        * Bump Copyright
+        * Added missing docblocks
         
-1.0.2   - Indenting and typo fixes, minor bugfixes
+1.0.2   * Indenting and typo fixes, minor bugfixes
 
-1.0.1   - Bugfix: typehints corrected
+1.0.1   * Bugfix: typehints corrected
 
-1.0.0   - Initial release
+1.0.0   * Initial release
