@@ -149,13 +149,14 @@ namespace TheSeer\fDOM {
          * Wrapper to DOMDocument loadHTMLFile with exception handling.
          * Returns true on success to satisfy the compatibilty of the original DOM Api
          *
-         * @param string $fname html file to load
+         * @param string  $fname html file to load
+         * @param integer $options Options bitmask (@see DOMDocument::loadHTMLFile)
          *
          * @return boolean
          */
-        public function loadHTMLFile($fname) {
+        public function loadHTMLFile($fname, $options = NULL) {
             $this->xp = null;
-            $tmp = @parent :: loadHTMLFile($fname);
+            $tmp = @parent :: loadHTMLFile($fname, $options);
             if (!$tmp) {
                 throw new fDOMException("loading html file '$fname' failed", fDOMException::LoadError);
             }
@@ -166,13 +167,14 @@ namespace TheSeer\fDOM {
          * Wrapper to DOMDocument loadHTML with exception handling
          * Returns true on success to satisfy the compatibilty of the original DOM Api
          *
-         * @param string $source html source code
+         * @param string  $source html source code
+         * @param integer $options Options bitmask (@see DOMDocument::loadHTML)
          *
          * @return boolean
          */
-        public function loadHTML($source) {
+        public function loadHTML($source, $options = NULL) {
             $this->xp = null;
-            $tmp = @parent :: loadHTML($source);
+            $tmp = @parent :: loadHTML($source, $options);
             if (!$tmp) {
                 throw new fDOMException('parsing html string failed', fDOMException::ParseError);
             }
