@@ -396,6 +396,35 @@ namespace TheSeer\fDOM {
             }
             return $this->isSameNode($node->ownerDocument);
         }
+        
+        /**
+         * Create a new element and append it as documentElement
+         *
+         * @param $name     Name of not element to create
+         * @param $content  Optional content to be set
+         *
+         * @return fDOMElement Reference to created fDOMElement
+         */
+        public function appendElement($name, $content = null) {
+            return $this->appendChild(
+                $this->createElement($name, $content)
+            );
+        }
+
+        /**
+         * Create a new element in given namespace and append it as documentElement
+         *
+         * @param $ns       Namespace of node to create
+         * @param $name     Name of not element to create
+         * @param $content  Optional content to be set
+         *
+         * @return fDOMElement Reference to created fDOMElement
+         */
+        public function appendElementNS($ns, $name, $content = null) {
+            return $this->appendChild(
+                $this->createElementNS($ns, $name, $content)
+            );
+        }
 
     } // fDOMDocument
 
