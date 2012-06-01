@@ -101,12 +101,9 @@ namespace TheSeer\fDOM {
          * @return fDOMElement Reference to created fDOMElement
          */
         public function appendElement($name, $content = null) {
-            $node = $this->ownerDocument->createElement($name);
-            $this->appendChild($node);
-            if (!is_null($content)) {
-                $node->nodeValue = $content;
-            }
-            return $node;
+            return $this->appendChild(
+                $this->ownerDocument->createElement($name, $content)
+            );
         }
 
         /**
@@ -119,12 +116,9 @@ namespace TheSeer\fDOM {
          * @return fDOMElement Reference to created fDOMElement
          */
         public function appendElementNS($ns, $name, $content = null) {
-            $node = $this->ownerDocument->createElementNS($ns, $name);
-            $this->appendChild($node);
-            if (!is_null($content)) {
-                $node->nodeValue = $content;
-            }
-            return $node;
+            return $this->appendChild(
+                $this->ownerDocument->createElementNS($ns, $name, $content)
+            );
         }
 
         /**
@@ -137,11 +131,25 @@ namespace TheSeer\fDOM {
          * @return fDOMElement Reference to created fDOMElement
          */
         public function appendElementPrefix($prefix, $name, $content = null) {
-            $node = $this->ownerDocument->createElementPrefix($prefix, $name, $content);
-            $this->appendChild($node);
-            return $node;
+            return $this->appendChild(
+                $this->ownerDocument->createElementPrefix($prefix, $name, $content)
+            );
         }
 
+        /**
+         * Create a new TextNode and append it
+         * 
+         * @param string $text
+         * 
+         * @return \DOMText 
+         */
+        public function appendTextNode($text)
+        {
+            return $this->appendChild(
+                $this->ownerDocument->createTextNode($text)
+            );
+        }
+        
         /**
          * Wrapper to DomElement->getAttribute with default value option
          *
