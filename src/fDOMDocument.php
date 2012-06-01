@@ -396,7 +396,47 @@ namespace TheSeer\fDOM {
             }
             return $this->isSameNode($node->ownerDocument);
         }
-
+        
+        /**
+         * Create a new fDOMElement. Other than in the original
+         * implementation it is possible to use a string with 
+         * Entities like "&"
+         *
+         * @param string $namespaceURI
+         * @param string $qualifiedName
+         * @param string $value
+         * 
+         * @return fDOMElement
+         */
+        public function createElement($name, $value = null)
+        {
+            $element = parent::createElement($name);
+            if (!is_null($value)) {
+                $element->appendTextNode($value);
+            }
+            return $element;
+        }
+        
+        /**
+         * Create a new fDOMElement. Other than in the original
+         * implementation it is possible to use a string with 
+         * Entities like "&"
+         *
+         * @param string $namespaceURI
+         * @param string $qualifiedName
+         * @param string $value
+         * 
+         * @return fDOMElement
+         */
+        public function createElementNS($namespaceURI, $qualifiedName, $value = null)
+        {
+            $element = parent::createElementNS($namespaceURI, $qualifiedName);
+            if (!is_null($value)) {
+                $element->appendTextNode($value);
+            }
+            return $element;
+        }
+        
     } // fDOMDocument
 
 }
