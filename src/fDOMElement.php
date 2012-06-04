@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2010-2011 Arne Blankerts <arne@blankerts.de>
+ * Copyright (c) 2010-2012 Arne Blankerts <arne@blankerts.de>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -59,7 +59,7 @@ namespace TheSeer\fDOM {
          * @param \DOMNode $ctx             \DOMNode to overwrite context
          * @param boolean  $registerNodeNS  Register flag pass thru
          *
-         * @return DomNodeList
+         * @return \DomNodeList
          */
         public function query($q, \DOMNode $ctx = null, $registerNodeNS = true) {
             return $this->ownerDocument->query($q, $ctx ? $ctx : $this, $registerNodeNS);
@@ -95,44 +95,38 @@ namespace TheSeer\fDOM {
         /**
          * Create a new element and append it
          *
-         * @param $name     Name of not element to create
-         * @param $content  Optional content to be set
+         * @param string $name     Name of not element to create
+         * @param string $content  Optional content to be set
          *
          * @return fDOMElement Reference to created fDOMElement
          */
         public function appendElement($name, $content = null) {
-            $node = $this->ownerDocument->createElement($name);
+            $node = $this->ownerDocument->createElement($name, $content);
             $this->appendChild($node);
-            if (!is_null($content)) {
-                $node->nodeValue = $content;
-            }
             return $node;
         }
 
         /**
          * Create a new element in given namespace and append it
          *
-         * @param $ns       Namespace of node to create
-         * @param $name     Name of not element to create
-         * @param $content  Optional content to be set
+         * @param string $ns       Namespace of node to create
+         * @param string $name     Name of not element to create
+         * @param string $content  Optional content to be set
          *
          * @return fDOMElement Reference to created fDOMElement
          */
         public function appendElementNS($ns, $name, $content = null) {
-            $node = $this->ownerDocument->createElementNS($ns, $name);
+            $node = $this->ownerDocument->createElementNS($ns, $name, $content);
             $this->appendChild($node);
-            if (!is_null($content)) {
-                $node->nodeValue = $content;
-            }
             return $node;
         }
 
         /**
          * Create a new element in given namespace and append it
          *
-         * @param $prefix   Namespace prefix for node to create
-         * @param $name     Name of not element to create
-         * @param $content  Optional content to be set
+         * @param string $prefix   Namespace prefix for node to create
+         * @param string $name     Name of not element to create
+         * @param string $content  Optional content to be set
          *
          * @return fDOMElement Reference to created fDOMElement
          */
@@ -140,6 +134,19 @@ namespace TheSeer\fDOM {
             $node = $this->ownerDocument->createElementPrefix($prefix, $name, $content);
             $this->appendChild($node);
             return $node;
+        }
+
+        /**
+         * Create a new text node and append it
+         *
+         * @param string $content Text content to be added
+         *
+         * @return \DOMText
+         */
+        public function appendTextNode($content) {
+            $text = $this->ownerDocument->createTextNode($content);
+            $this->appendChild($text);
+            return $text;
         }
 
         /**
@@ -176,9 +183,11 @@ namespace TheSeer\fDOM {
          *
          * @param string  $attr          Attribute name to set
          * @param string  $value         Value to set attribute to
-         * @param boolean $keepEntitites Flag to signale if entities should be kept
+         * @param bool $keepEntitites Flag to signale if entities should be kept
          *
-         * @return fDOMAttr
+         * @throws fDOMException
+         *
+         * @return DOMAttr
          *
          * @see DOMElement::setAttribute()
          */
@@ -203,7 +212,7 @@ namespace TheSeer\fDOM {
          * @param string  $value         Value to set attribute to
          * @param boolean $keepEntitites Flag to signale if entities should be kept
          *
-         * @return fDOMAttr
+         * @return \DOMAttr
          *
          * @see DOMElement::setAttribute()
          */
@@ -223,7 +232,8 @@ namespace TheSeer\fDOM {
         /**
          * Helper to add multiple attributes to an element
          *
-         * @param array  $attr    Attributes to add
+         * @param array $attr Attributes to add as key-value pair
+         * @param bool $keepEntities Flag wether to keep entities
          *
          * @return array List with references to created DOMAttr
          */
@@ -232,7 +242,6 @@ namespace TheSeer\fDOM {
             foreach($attr as $name => $value) {
                $attList[] = $this->setAttribute($name, $value, $keepEntities);
             }
-
             return $attList;
         }
 
@@ -242,6 +251,7 @@ namespace TheSeer\fDOM {
          * @param string $ns       Namespace of attribute
          * @param string $prefix   Namespace prefix for attribute to create
          * @param array  $attr     Attributes to add
+         * @param bool $keepEntities Flag wether to keep entities
          *
          * @return void
          */
@@ -277,7 +287,7 @@ namespace TheSeer\fDOM {
         /**
          * Check if the given node is in the same document
          *
-         * @param DomNode $node Node to compare with
+         * @param \DomNode $node Node to compare with
          *
          * @return boolean true on match, false if they differ
          *

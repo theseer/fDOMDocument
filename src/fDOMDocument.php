@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2010-2011 Arne Blankerts <arne@blankerts.de>
+ * Copyright (c) 2010-2012 Arne Blankerts <arne@blankerts.de>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -114,9 +114,11 @@ namespace TheSeer\fDOM {
          * Returns true on success to satisfy the compatibilty of the original DOM Api
          *
          * @param string  $fname   File to load
-         * @param integer $options LibXML Flags to pass
+         * @param int|null $options LibXML Flags to pass
          *
-         * @return boolean
+         * @throws fDOMException
+         *
+         * @return bool|mixed
          */
         public function load($fname, $options = LIBXML_NONET) {
             $this->xp = null;
@@ -133,6 +135,8 @@ namespace TheSeer\fDOM {
          *
          * @param string  $source  XML source code
          * @param integer $options LibXML option flags
+         *
+         * @throws fDOMException
          *
          * @return boolean
          */
@@ -152,6 +156,8 @@ namespace TheSeer\fDOM {
          * @param string  $fname html file to load
          * @param integer $options Options bitmask (@see DOMDocument::loadHTMLFile)
          *
+         * @throws fDOMException
+         *
          * @return boolean
          */
         public function loadHTMLFile($fname, $options = NULL) {
@@ -170,6 +176,8 @@ namespace TheSeer\fDOM {
          * @param string  $source html source code
          * @param integer $options Options bitmask (@see DOMDocument::loadHTML)
          *
+         * @throws fDOMException
+         *
          * @return boolean
          */
         public function loadHTML($source, $options = NULL) {
@@ -184,8 +192,10 @@ namespace TheSeer\fDOM {
         /**
          * Wrapper to DOMDocument::save with exception handling
          *
-         * @param string  $fname   filename to save to
+         * @param string  $filename filename to save to
          * @param integer $options Options bitmask (@see DOMDocument::save)
+         *
+         * @throws fDOMException
          *
          * @return integer bytes saved
          */
@@ -200,6 +210,8 @@ namespace TheSeer\fDOM {
         /**
          * Wrapper to DOMDocument::saveHTML with exception handling
          *
+         * @throws fDOMException
+         *
          * @return string html content
          */
         public function saveHTML() {
@@ -213,8 +225,10 @@ namespace TheSeer\fDOM {
         /**
          * Wrapper to DOMDocument::saveHTMLfile with exception handling
          *
-         * @param string $fname filename to save to
+         * @param string $filename filename to save to
          * @param integer $options Options bitmask (@see DOMDocument::saveHTMLFile)
+         *
+         * @throws fDOMException
          *
          * @return integer bytes saved
          */
@@ -229,8 +243,10 @@ namespace TheSeer\fDOM {
         /**
          * Wrapper to DOMDocument::saveXML with exception handling
          *
-         * @param \DOMNode context  node to start serializing at
-         * @param integer  options  options flags as bitmask
+         * @param \DOMNode $node    node to start serializing at
+         * @param integer  $options options flags as bitmask
+         *
+         * @throws fDOMException
          *
          * @return string serialized XML
          */
@@ -252,7 +268,9 @@ namespace TheSeer\fDOM {
         /**
          * get Instance of DOMXPath Object for current DOM
          *
-         * @return DOMXPath
+         * @throws fDOMException
+         *
+         * @return fDOMXPath
          */
         public function getDOMXPath() {
             if (is_null($this->xp)) {
@@ -267,13 +285,14 @@ namespace TheSeer\fDOM {
         /**
          * Convert a given DOMNodeList into a DOMFragment
          *
-         * @param DOMNodeList $list The Nodelist to process
+         * @param \DOMNodeList $list The Nodelist to process
          * @param boolean     $move Signale if nodes are to be moved into fragment or not
          *
-         * @return DOMDocumentFragment
+         * @return fDOMDocumentFragment
          */
         public function nodeList2Fragment(\DOMNodeList $list, $move=false) {
             $frag = $this->createDocumentFragment();
+            /** @var fDOMNode $node */
             foreach($list as $node) {
                 $frag->appendChild($move ? $node : $node->cloneNode(true));
             }
@@ -284,8 +303,8 @@ namespace TheSeer\fDOM {
          * Perform an xpath query
          *
          * @param String   $q   query string containing xpath
-         * @param DOMNode  $ctx (optional) Context DOMNode
-         * @param boolean  $registerNodeNS  Register flag pass thru
+         * @param \DOMNode|null $ctx (optional) Context DOMNode
+         * @param boolean  $registerNodeNS  Register flag pass through
          *
          * @return \DOMNodeList
          */
@@ -300,7 +319,7 @@ namespace TheSeer\fDOM {
          * Perform an xpath query and return only the 1st match
          *
          * @param String   $q   query string containing xpath
-         * @param DOMNode  $ctx (optional) Context DOMNode
+         * @param \DOMNode  $ctx (optional) Context DOMNode
          * @param boolean  $registerNodeNS  Register flag pass thru
          *
          * @return fDOMNode
@@ -312,13 +331,14 @@ namespace TheSeer\fDOM {
             return $this->xp->queryOne($q, $ctx, $registerNodeNS);
         }
 
-
         /**
          * Forwarder to fDOMXPath's prepare method allowing for easy and secure
          * placeholder replacement comparable to sql's prepared statements
          * .
          * @param string $xpath    String containing xpath with :placeholder markup
          * @param array  $valueMap Array containing keys (:placeholder) and value pairs to be quoted
+         *
+         * @return string
          */
         public function prepareQuery($xpath, array $valueMap) {
             if (is_null($this->xp)) {
@@ -332,6 +352,8 @@ namespace TheSeer\fDOM {
          *
          * @param string $prefix The prefix to use
          * @param string $uri    The uri to assign to this prefix
+         *
+         * @throws fDOMException
          *
          * @return void
          */
@@ -350,6 +372,8 @@ namespace TheSeer\fDOM {
          *
          * @param mixed $restrict Array of function names or string with functionname to restrict callabilty to
          *
+         * @throws fDOMException
+         *
          * @return void
          */
         public function registerPHPFunctions($restrict = null) {
@@ -365,19 +389,77 @@ namespace TheSeer\fDOM {
         /**
          * Create a new element in namespace defined by given prefix
          *
-         * @param $prefix   Namespace prefix for node to create
-         * @param $name     Name of not element to create
-         * @param $content  Optional content to be set
+         * @param string $prefix   Namespace prefix for node to create
+         * @param string $name     Name of not element to create
+         * @param string $content  Optional content to be set
+         * @param bool $asTextNode Create content as textNode rather then setting nodeValue
+         *
+         * @throws fDOMException
          *
          * @return fDOMElement Reference to created fDOMElement
          */
-        public function createElementPrefix($prefix, $name, $content = null) {
+        public function createElementPrefix($prefix, $name, $content = null, $asTextNode = false) {
             if (!isset($this->prefixes[$prefix])) {
                 throw new fDOMException("'$prefix' not bound", fDOMException::UnboundPrefix);
             }
-            $node = $this->createElementNS($this->prefixes[$prefix], $prefix.':'.$name);
-            if (!is_null($content)) {
-                $node->nodeValue = $content;
+            return $this->createElementNS($this->prefixes[$prefix], $prefix.':'.$name, $content, $asTextNode);
+        }
+
+        /**
+         * Create a new fDOMElement and return it, optionally set content
+         *
+         * @param string $name Name of node to create
+         * @param null $content Content to set (optional)
+         * @param bool $asTextNode Create content as textNode rather then setting nodeValue
+         *
+         * @throws fDOMException
+         *
+         * @return fDOMElement Reference to created fDOMElement
+         */
+        public function createElement($name, $content = null, $asTextnode = false) {
+            $node = parent::createElement($name);
+            if (!$node) {
+                throw new fDOMException("Creating element with name '$name' failed", fDOMException::NameInvalid);
+            }
+            if ($content !== null) {
+                if ($asTextnode) {
+                    $node->appendChild($this->createTextnode($content));
+                } else {
+                    $node->nodeValue = $content;
+                }
+                if (libxml_get_errors()) {
+                    throw new fDOMException("Setting content value failed", fDOMException::SetFailedError);
+                }
+            }
+            return $node;
+        }
+
+        /**
+         * Create a new fDOMElement within given namespace and return it
+         *
+         * @param string $namespace Namespace URI for node to create
+         * @param string $name Name of node to create
+         * @param null $content Content to set (optional)
+         * @param bool $asTextNode Create content as textNode rather then setting nodeValue
+         *
+         * @throws fDOMException
+         *
+         * @return fDOMElement
+         */
+        public function createElementNS($namespace, $name, $content = null, $asTextNode = false) {
+            $node = parent::createElementNS($namespace, $name);
+            if (!$node) {
+                throw new fDOMException("Creating element with name '$name' failed", fDOMException::NameInvalid);
+            }
+            if ($content !== null) {
+                if ($asTextNode) {
+                    $node->appendChild($this->createTextnode($content));
+                } else {
+                    $node->nodeValue = $content;
+                }
+                if (libxml_get_errors()) {
+                    throw new fDOMException("Setting content value failed", fDOMException::SetFailedError);
+                }
             }
             return $node;
         }

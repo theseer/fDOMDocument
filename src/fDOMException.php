@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2010-2011 Arne Blankerts <arne@blankerts.de>
+ * Copyright (c) 2010-2012 Arne Blankerts <arne@blankerts.de>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -56,6 +56,7 @@ namespace TheSeer\fDOM {
         const NoDOMXPath         = 6;
         const UnboundPrefix      = 7;
         const SetFailedError     = 8;
+        const NameInvalid        = 9;
 
         /**
          * List of libxml error objects
@@ -64,12 +65,6 @@ namespace TheSeer\fDOM {
          */
         private $errorList;
 
-        /**
-         * Flag wheter getMessage() should return full (e.g. with details) message or only exception message
-         *
-         * @var boolean
-         */
-        private $fullFlag = false;
 
         /**
          * Full Error message
@@ -86,15 +81,18 @@ namespace TheSeer\fDOM {
          */
         private $shortMessage = null;
 
+
+        private static $fullMesageMode = true;
+
         /**
          * Constructor
          *
          * @param string  $message Exception message
          * @param integer $code    Exception code
+         * @param Exception $chain optional chained exception
          *
-         * @return void
          */
-        public function __construct($message, $code = 0, $chain = NULL) {
+        public function __construct($message, $code = 0, \Exception $chain = NULL) {
             $this->shortMessage = $message;
             $this->errorList = libxml_get_errors();
             libxml_clear_errors();
@@ -129,6 +127,11 @@ namespace TheSeer\fDOM {
                 }
 
                 $this->fullMessage .= str_replace("\n", '', $error->message)."\n";
+
+                if (self::$fullMesageMode) {
+                    $this->message = $this->fullMessage;
+                }
+
             }
         }
 
@@ -142,6 +145,15 @@ namespace TheSeer\fDOM {
         }
 
         /**
+         * Access to shortMessage
+         *
+         * @return string
+         */
+        public function getShortMessage() {
+            return $this->shortMessage;
+        }
+
+        /**
          * Accessor to errorList objets
          *
          * @return array
@@ -151,7 +163,7 @@ namespace TheSeer\fDOM {
         }
 
         /**
-         * Toggle wehter getMessage() should return full or only excepotion message
+         * Toggle wehter getMessage() should return full or only exception message
          *
          * @param boolean $full Flag to enable or disable full message output
          *
