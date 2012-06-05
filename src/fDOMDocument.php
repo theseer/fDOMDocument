@@ -417,19 +417,23 @@ namespace TheSeer\fDOM {
          * @return fDOMElement Reference to created fDOMElement
          */
         public function createElement($name, $content = null, $asTextnode = false) {
-            $node = parent::createElement($name);
-            if (!$node) {
-                throw new fDOMException("Creating element with name '$name' failed", fDOMException::NameInvalid);
-            }
-            if ($content !== null) {
-                if ($asTextnode) {
-                    $node->appendChild($this->createTextnode($content));
-                } else {
-                    $node->nodeValue = $content;
+            try {
+                $node = parent::createElement($name);
+                if (!$node) {
+                    throw new fDOMException("Creating element with name '$name' failed", fDOMException::NameInvalid);
                 }
-                if (libxml_get_errors()) {
-                    throw new fDOMException("Setting content value failed", fDOMException::SetFailedError);
+                if ($content !== null) {
+                    if ($asTextnode) {
+                        $node->appendChild($this->createTextnode($content));
+                    } else {
+                        $node->nodeValue = $content;
+                    }
+                    if (libxml_get_errors()) {
+                        throw new fDOMException("Setting content value failed", fDOMException::SetFailedError);
+                    }
                 }
+            } catch (\DOMException $e) {
+                throw new fDOMException("Creating elemnt with name '$name' failed", 0, $e);
             }
             return $node;
         }
