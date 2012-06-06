@@ -227,6 +227,9 @@ namespace TheSeer\fDOM\Tests {
             $this->assertTrue($this->dom->inSameDocument($node));
         }
 
+        /**
+         * @covers TheSeer\fDOM\fDOMDocument::inSameDocument
+         */
         public function testThatANodeFromADifferentDocumentIsNotConsideredAsInSameDocument() {
             $dom = new fDOMDocument();
             $node = $dom->createElement('foo');
@@ -235,6 +238,9 @@ namespace TheSeer\fDOM\Tests {
             $this->assertFalse($this->dom->documentElement->inSameDocument($node));
         }
 
+        /**
+         * @covers TheSeer\fDOM\fDOMDocument::inSameDocument
+         */
         public function testInSameDocumentWorksForDOMDocument() {
             $dom = new fDOMDocument();
             $this->assertFalse($this->dom->inSameDocument($dom));

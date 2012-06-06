@@ -75,6 +75,12 @@ namespace TheSeer\fDOM\Tests {
             $this->xp->query('//[invalid');
         }
 
+        public function testQueryReturnsNodeList() {
+            $res = $this->xp->query('//*');
+            $this->assertInstanceOf('DOMNodeList', $res);
+            $this->assertEquals(2, $res->length);
+        }
+
         /**
          * @covers TheSeer\fDOM\fDOMXPath::evaluate
          * @expectedException TheSeer\fDOM\fDOMException
