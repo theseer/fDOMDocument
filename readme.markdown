@@ -56,8 +56,8 @@ Usage Samples
 Changelog
 ---------
 #####Release 1.3.0
-* Added appendTextNode method (Thanx to Markus Ineichen)
-* Added appendElement / appendElementNS to DOMDocument to support documentElement "creation" (Thanx to Markus Ineichen)
+* Added appendTextNode method (Thanks to Markus Ineichen)
+* Added appendElement / appendElementNS to DOMDocument to support documentElement "creation" (Thanks to Markus Ineichen)
 * Overwrite createElement / createElementNS to throw exception on error
 * Removed fDOMFilter code: Unmaintained and broken in its current form
 * Added (static) Flag for fDOMException to globally enable full exception message
