@@ -77,6 +77,13 @@ namespace TheSeer\fDOM\Tests {
         /**
          * @expectedException TheSeer\fDOM\fDOMException
          */
+        public function testAttemptingToLoadAnXMLStringWithAnUndefinedEntityThrowsException() {
+            $this->dom->loadXML('<?xml version="1.0" ?><root>&undefined;</root>');
+        }
+
+        /**
+         * @expectedException TheSeer\fDOM\fDOMException
+         */
         public function testloadingInvalidXMLStringThrowsException() {
             $this->dom->loadXML('<?xml version="1.0" ?><broken>');
         }
@@ -94,6 +101,14 @@ namespace TheSeer\fDOM\Tests {
         public function testloadingBrokenXMLFileThrowsException() {
             $this->dom->load(__DIR__ . '/_data/broken.xml');
         }
+
+        /**
+         * @expectedException TheSeer\fDOM\fDOMException
+         */
+        public function testAttemptingToLoadAnXMLFileWithAnUndefinedEntityThrowsException() {
+            $this->dom->load(__DIR__ . '/_data/undefentity.xml');
+        }
+
 
         /**
          * @covers TheSeer\fDOM\fDOMDocument::query

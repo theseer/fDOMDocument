@@ -122,8 +122,8 @@ namespace TheSeer\fDOM {
          */
         public function load($fname, $options = LIBXML_NONET) {
             $this->xp = null;
-            $tmp = @parent :: load($fname, $options);
-            if (!$tmp) {
+            $tmp = parent :: load($fname, $options);
+            if (!$tmp || libxml_get_last_error()) {
                 throw new fDOMException("loading file '$fname' failed.", fDOMException::LoadError);
             }
             return true;
@@ -142,8 +142,8 @@ namespace TheSeer\fDOM {
          */
         public function loadXML($source, $options = LIBXML_NONET) {
             $this->xp = null;
-            $tmp = @parent :: loadXML($source, $options);
-            if (!$tmp) {
+            $tmp = parent :: loadXML($source, $options);
+            if (!$tmp || libxml_get_last_error()) {
                 throw new fDOMException('parsing string failed', fDOMException::ParseError);
             }
             return true;
@@ -162,8 +162,8 @@ namespace TheSeer\fDOM {
          */
         public function loadHTMLFile($fname, $options = NULL) {
             $this->xp = null;
-            $tmp = @parent :: loadHTMLFile($fname, $options);
-            if (!$tmp) {
+            $tmp = parent :: loadHTMLFile($fname, $options);
+            if (!$tmp || libxml_get_last_error()) {
                 throw new fDOMException("loading html file '$fname' failed", fDOMException::LoadError);
             }
             return true;
@@ -182,8 +182,8 @@ namespace TheSeer\fDOM {
          */
         public function loadHTML($source, $options = NULL) {
             $this->xp = null;
-            $tmp = @parent :: loadHTML($source, $options);
-            if (!$tmp) {
+            $tmp = parent :: loadHTML($source, $options);
+            if (!$tmp || libxml_get_last_error()) {
                 throw new fDOMException('parsing html string failed', fDOMException::ParseError);
             }
             return true;
@@ -200,7 +200,7 @@ namespace TheSeer\fDOM {
          * @return integer bytes saved
          */
         public function save($filename, $options = NULL) {
-            $tmp = @parent::save($filename, $options);
+            $tmp = parent::save($filename, $options);
             if (!$tmp) {
                 throw new fDOMException('saving xml file failed', fDOMException::SaveError);
             }
@@ -210,12 +210,16 @@ namespace TheSeer\fDOM {
         /**
          * Wrapper to DOMDocument::saveHTML with exception handling
          *
-         * @throws fDOMException
+         * @param DOMNode|null $node Context DOMNode (optional)
          *
+         * @throws fDOMException
          * @return string html content
          */
-        public function saveHTML() {
-            $tmp = @parent::saveHTML();
+        public function saveHTML(\DOMNode $node = NULL) {
+            if (version_compare(PHP_VERSION, '5.3.6', '<') && $node != NULL) {
+                throw new fDOMException('Passing a context node requires PHP 5.3.6+', fDOMException::SaveError);
+            }
+            $tmp = parent::saveHTML($node);
             if (!$tmp) {
                 throw new fDOMException('serializing to HTML failed', fDOMException::SaveError);
             }
@@ -233,7 +237,7 @@ namespace TheSeer\fDOM {
          * @return integer bytes saved
          */
         public function saveHTMLFile($filename, $options = NULL) {
-            $tmp = @parent::saveHTMLFile($filename, $options);
+            $tmp = parent::saveHTMLFile($filename, $options);
             if (!$tmp) {
                 throw new fDOMException('saving to HTML file failed', fDOMException::SaveError);
             }
@@ -252,7 +256,7 @@ namespace TheSeer\fDOM {
          */
         public function saveXML(\DOMNode $node = NULL, $options = NULL) {
             try {
-                $tmp = @parent::saveXML($node, $options);
+                $tmp = parent::saveXML($node, $options);
                 if (!$tmp) {
                     throw new fDOMException('serializing to XML failed', fDOMException::SaveError);
                 }
