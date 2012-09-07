@@ -55,6 +55,9 @@ Usage Samples
     
 Changelog
 ---------
+#####Release 1.3.1
+* PHP 5.3 compatibility: changed interal behavior for incompatible changes from PHP 5.3 to 5.4 (Thanks to Jens Graefe for pointing it out)
+
 #####Release 1.3.0
 * Added appendTextNode method (Thanks to Markus Ineichen)
 * Added appendElement / appendElementNS to DOMDocument to support documentElement "creation" (Thanks to Markus Ineichen)
