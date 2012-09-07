@@ -162,7 +162,14 @@ namespace TheSeer\fDOM {
          */
         public function loadHTMLFile($fname, $options = NULL) {
             $this->xp = null;
-            $tmp = parent :: loadHTMLFile($fname, $options);
+            if (version_compare(PHP_VERSION, '5.4.0', '<')) {
+                if ($options != NULL) {
+                    throw new fDOMException('Passing options requires PHP 5.4.0+', fDOMException::LoadError);
+                }
+                $tmp = parent :: loadHTMLFile($fname);
+            } else {
+                $tmp = parent :: loadHTMLFile($fname, $options);
+            }
             if (!$tmp || libxml_get_last_error()) {
                 throw new fDOMException("loading html file '$fname' failed", fDOMException::LoadError);
             }
@@ -182,7 +189,14 @@ namespace TheSeer\fDOM {
          */
         public function loadHTML($source, $options = NULL) {
             $this->xp = null;
-            $tmp = parent :: loadHTML($source, $options);
+            if (version_compare(PHP_VERSION, '5.4.0', '<')) {
+                if ($options != NULL) {
+                    throw new fDOMException('Passing options requires PHP 5.4.0+', fDOMException::LoadError);
+                }
+                $tmp = parent :: loadHTML($source);
+            } else {
+                $tmp = parent :: loadHTML($source, $options);
+            }
             if (!$tmp || libxml_get_last_error()) {
                 throw new fDOMException('parsing html string failed', fDOMException::ParseError);
             }
