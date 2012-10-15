@@ -41,6 +41,8 @@
        <file name="fDOMXPath.php" role="php" />
     </dir>
    </dir>
+   <file baseinstalldir="/" name="README.md" role="doc" />
+   <file baseinstalldir="/" name="LICENSE" role="doc" />
   </dir>
  </contents>
  <dependencies>
