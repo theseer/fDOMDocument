@@ -43,6 +43,18 @@
    </dir>
    <file baseinstalldir="/" name="README.md" role="doc" />
    <file baseinstalldir="/" name="LICENSE" role="doc" />
+   <file baseinstalldir="/" name="phpunit.xml.dist" role="test" />
+   <dir name="tests">
+     <dir name="_data">
+        <file name="broken.xml" role="test" />
+        <file name="undefentity.xml" role="test" />
+        <file name="valid.xml" role="test" />
+     </dir>
+     <file name="fDOMDocumentFragment.test.php" role="test" />
+     <file name="fDOMDocument.test.php" role="test" />
+     <file name="fDOMElement.test.php" role="test" />
+     <file name="fDOMXPath.test.php" role="test" />
+   </dir>
   </dir>
  </contents>
  <dependencies>
