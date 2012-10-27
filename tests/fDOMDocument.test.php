@@ -75,35 +75,35 @@ namespace TheSeer\fDOM\Tests {
         }
 
         /**
-         * @expectedException TheSeer\fDOM\fDOMException
+         * @expectedException \TheSeer\fDOM\fDOMException
          */
         public function testAttemptingToLoadAnXMLStringWithAnUndefinedEntityThrowsException() {
             $this->dom->loadXML('<?xml version="1.0" ?><root>&undefined;</root>');
         }
 
         /**
-         * @expectedException TheSeer\fDOM\fDOMException
+         * @expectedException \TheSeer\fDOM\fDOMException
          */
         public function testloadingInvalidXMLStringThrowsException() {
             $this->dom->loadXML('<?xml version="1.0" ?><broken>');
         }
 
         /**
-         * @expectedException TheSeer\fDOM\fDOMException
+         * @expectedException \TheSeer\fDOM\fDOMException
          */
         public function testTryingToLoadNonExistingFileThrowsException() {
             $this->dom->load('_does_not_exist.xml');
         }
 
         /**
-         * @expectedException TheSeer\fDOM\fDOMException
+         * @expectedException \TheSeer\fDOM\fDOMException
          */
         public function testloadingBrokenXMLFileThrowsException() {
             $this->dom->load(__DIR__ . '/_data/broken.xml');
         }
 
         /**
-         * @expectedException TheSeer\fDOM\fDOMException
+         * @expectedException \TheSeer\fDOM\fDOMException
          */
         public function testAttemptingToLoadAnXMLFileWithAnUndefinedEntityThrowsException() {
             $this->dom->load(__DIR__ . '/_data/undefentity.xml');
@@ -111,7 +111,7 @@ namespace TheSeer\fDOM\Tests {
 
 
         /**
-         * @covers TheSeer\fDOM\fDOMDocument::query
+         * @covers \TheSeer\fDOM\fDOMDocument::query
          */
         public function testQueryReturnsNodeList() {
             $this->dom->load(__DIR__ . '/_data/valid.xml');
@@ -121,7 +121,7 @@ namespace TheSeer\fDOM\Tests {
         }
 
         /**
-         * @covers TheSeer\fDOM\fDOMDocument::queryOne
+         * @covers \TheSeer\fDOM\fDOMDocument::queryOne
          */
         public function testQueryOneReturnsElement() {
             $this->dom->load(__DIR__ . '/_data/valid.xml');
@@ -137,7 +137,7 @@ namespace TheSeer\fDOM\Tests {
         }
 
         /**
-         * @expectedException TheSeer\fDOM\fDOMException
+         * @expectedException \TheSeer\fDOM\fDOMException
          */
         public function testSaveXMLThrowsExceptionWithReferenceToNodeFromOtherDocument() {
             $dom = new fDOMDocument();
@@ -145,7 +145,7 @@ namespace TheSeer\fDOM\Tests {
         }
 
         /**
-         * @covers TheSeer\fDOM\fDOMDocument::nodeList2FragMent
+         * @covers \TheSeer\fDOM\fDOMDocument::nodeList2FragMent
          */
         public function testTransformNodeListToFragmentWorks() {
             $this->dom->loadXML('<?xml version="1.0" ?><root><node1/><node2 /></root>');
@@ -167,7 +167,7 @@ namespace TheSeer\fDOM\Tests {
         }
 
         /**
-         * @expectedException TheSeer\fDOM\fDOMException
+         * @expectedException \TheSeer\fDOM\fDOMException
          */
         public function testCreatingElementWithInvalidNameThrowsException() {
             $node = $this->dom->createElement('in valid');
@@ -180,7 +180,7 @@ namespace TheSeer\fDOM\Tests {
         }
 
         /**
-         * @covers TheSeer\fDOM\fDOMDocument::createElementPrefix
+         * @covers \TheSeer\fDOM\fDOMDocument::createElementPrefix
          */
         public function testCreatingNewElementByprefix() {
             $this->dom->registerNamespace('test', 'test:uri');
@@ -189,8 +189,8 @@ namespace TheSeer\fDOM\Tests {
         }
 
         /**
-         * @covers TheSeer\fDOM\fDOMDocument::createElementPrefix
-         * @expectedException TheSeer\fDOM\fDOMException
+         * @covers \TheSeer\fDOM\fDOMDocument::createElementPrefix
+         * @expectedException \TheSeer\fDOM\fDOMException
          */
         public function testTryingToCreateNewElementByprefixWithUndefinedPrefixThrowsException() {
             $this->dom->createElementPrefix('test','node');
@@ -203,14 +203,14 @@ namespace TheSeer\fDOM\Tests {
         }
 
         /**
-         * @expectedException  TheSeer\fDOM\fDOMException
+         * @expectedException \TheSeer\fDOM\fDOMException
          */
         public function testSettingContentUnescapedForNewElementThrowsExceptionOnInvalidEntity() {
             $node = $this->dom->createElement('test', "test & demo");
         }
 
         public function testSettingContentAsTextNodeForNewElementEncodesEntities() {
-            $node = $this->dom->createElement('test', "test &amp; demo", true);
+            $node = $this->dom->createElement('test', "test &amp; demo", TRUE);
             $this->assertEquals('test &amp; demo', $node->nodeValue);
         }
 
@@ -221,20 +221,20 @@ namespace TheSeer\fDOM\Tests {
         }
 
         /**
-         * @expectedException  TheSeer\fDOM\fDOMException
+         * @expectedException  \TheSeer\fDOM\fDOMException
          */
         public function testSettingContentUnescapedForNewElementWithNamespaceThrowsExceptionOnInvalidEntity() {
             $node = $this->dom->createElementNS('test:uri', 'test', "test & demo");
         }
 
         public function testSettingContentAsTextNodeForNewElementWithNamespaceEncodesEntities() {
-            $node = $this->dom->createElementNS('test:uri','test', "test &amp; demo", true);
+            $node = $this->dom->createElementNS('test:uri','test', "test &amp; demo", TRUE);
             $this->assertInstanceOf('TheSeer\fDOM\fDOMElement', $node);
             $this->assertEquals('test &amp; demo', $node->nodeValue);
         }
 
         /**
-         * @covers TheSeer\fDOM\fDOMDocument::queryOne
+         * @covers \TheSeer\fDOM\fDOMDocument::queryOne
          */
         public function testThatTwoNodesAreIdentifiedAsBeingInTheSameDocument() {
             $this->dom->loadXML('<?xml version="1.0" ?><root><node /></root>');
@@ -243,7 +243,7 @@ namespace TheSeer\fDOM\Tests {
         }
 
         /**
-         * @covers TheSeer\fDOM\fDOMDocument::inSameDocument
+         * @covers \TheSeer\fDOM\fDOMDocument::inSameDocument
          */
         public function testThatANodeFromADifferentDocumentIsNotConsideredAsInSameDocument() {
             $dom = new fDOMDocument();
@@ -254,7 +254,7 @@ namespace TheSeer\fDOM\Tests {
         }
 
         /**
-         * @covers TheSeer\fDOM\fDOMDocument::inSameDocument
+         * @covers \TheSeer\fDOM\fDOMDocument::inSameDocument
          */
         public function testInSameDocumentWorksForDOMDocument() {
             $dom = new fDOMDocument();
@@ -269,6 +269,29 @@ namespace TheSeer\fDOM\Tests {
         public function testAppendElementNSCreatesANewNodeAndAttachesIt() {
             $node = $this->dom->appendElementNS('test:uri', 'test');
             $this->assertSame($node, $this->dom->documentElement);
+        }
+
+        /**
+         * @covers \TheSeer\fDOM\fDOMDocument::__clone
+         */
+        public function testCloningTriggersCreationOfNewDOMXPathInstance() {
+            $this->dom->loadXML('<?xml version="1.0" ?><test />');
+            $xp1 = $this->dom->getDOMXPath();
+            $clone = clone $this->dom;
+            $xp2 = $clone->getDOMXPath();
+            $this->assertNotSame($xp2, $xp1);
+        }
+
+        /**
+         * https://github.com/theseer/fDOMDocument/issues/15
+         */
+        public function testQueryReturnsNodeFromClonedDocument() {
+            $this->dom->loadXML('<?xml version="1.0" ?><test />');
+            $clone = clone $this->dom;
+
+            $node = $clone->queryOne('/test');
+            $this->assertNotSame($this->dom->documentElement, $node);
+
         }
 
     }

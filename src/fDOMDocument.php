@@ -60,7 +60,7 @@ namespace TheSeer\fDOM {
          *
          * @var fDOMXPath
          */
-        private $xp = null;
+        private $xp = NULL;
 
         /**
          * List of registered prefixes and their namespace uri
@@ -77,12 +77,12 @@ namespace TheSeer\fDOM {
          *
          * @return fDOMDocument
          */
-        public function __construct($version = '1.0', $encoding = 'utf-8', $streamOptions = null) {
+        public function __construct($version = '1.0', $encoding = 'utf-8', $streamOptions = NULL) {
             if (!is_null($streamOptions)) {
                 $this->setStreamContext($streamOptions);
             }
 
-            libxml_use_internal_errors(true);
+            libxml_use_internal_errors(TRUE);
             $rc = parent::__construct($version, $encoding);
 
             $this->registerNodeClass('\DOMDocument', get_called_class());
@@ -94,6 +94,13 @@ namespace TheSeer\fDOM {
         }
 
         /**
+         * Reset XPath object so the clone gets a new instance when needed
+         */
+        function __clone() {
+            $this->xp = NULL;
+        }
+
+        /**
          * Set Stream context options
          *
          * @param Array $options Stream context options
@@ -102,11 +109,11 @@ namespace TheSeer\fDOM {
          */
         public function setStreamContext(Array $options) {
             if (!count($options)) {
-                return false;
+                return FALSE;
             }
             $context = stream_context_create($options);
             libxml_set_streams_context($context);
-            return true;
+            return TRUE;
         }
 
         /**
@@ -121,12 +128,12 @@ namespace TheSeer\fDOM {
          * @return bool|mixed
          */
         public function load($fname, $options = LIBXML_NONET) {
-            $this->xp = null;
+            $this->xp = NULL;
             $tmp = parent :: load($fname, $options);
             if (!$tmp || libxml_get_last_error()) {
                 throw new fDOMException("loading file '$fname' failed.", fDOMException::LoadError);
             }
-            return true;
+            return TRUE;
         }
 
         /**
@@ -141,12 +148,12 @@ namespace TheSeer\fDOM {
          * @return boolean
          */
         public function loadXML($source, $options = LIBXML_NONET) {
-            $this->xp = null;
+            $this->xp = NULL;
             $tmp = parent :: loadXML($source, $options);
             if (!$tmp || libxml_get_last_error()) {
                 throw new fDOMException('parsing string failed', fDOMException::ParseError);
             }
-            return true;
+            return TRUE;
         }
 
         /**
@@ -161,7 +168,7 @@ namespace TheSeer\fDOM {
          * @return boolean
          */
         public function loadHTMLFile($fname, $options = NULL) {
-            $this->xp = null;
+            $this->xp = NULL;
             if (version_compare(PHP_VERSION, '5.4.0', '<')) {
                 if ($options != NULL) {
                     throw new fDOMException('Passing options requires PHP 5.4.0+', fDOMException::LoadError);
@@ -173,7 +180,7 @@ namespace TheSeer\fDOM {
             if (!$tmp || libxml_get_last_error()) {
                 throw new fDOMException("loading html file '$fname' failed", fDOMException::LoadError);
             }
-            return true;
+            return TRUE;
         }
 
         /**
@@ -188,7 +195,7 @@ namespace TheSeer\fDOM {
          * @return boolean
          */
         public function loadHTML($source, $options = NULL) {
-            $this->xp = null;
+            $this->xp = NULL;
             if (version_compare(PHP_VERSION, '5.4.0', '<')) {
                 if ($options != NULL) {
                     throw new fDOMException('Passing options requires PHP 5.4.0+', fDOMException::LoadError);
@@ -200,7 +207,7 @@ namespace TheSeer\fDOM {
             if (!$tmp || libxml_get_last_error()) {
                 throw new fDOMException('parsing html string failed', fDOMException::ParseError);
             }
-            return true;
+            return TRUE;
         }
 
         /**
@@ -308,11 +315,11 @@ namespace TheSeer\fDOM {
          *
          * @return fDOMDocumentFragment
          */
-        public function nodeList2Fragment(\DOMNodeList $list, $move=false) {
+        public function nodeList2Fragment(\DOMNodeList $list, $move=FALSE) {
             $frag = $this->createDocumentFragment();
             /** @var fDOMNode $node */
             foreach($list as $node) {
-                $frag->appendChild($move ? $node : $node->cloneNode(true));
+                $frag->appendChild($move ? $node : $node->cloneNode(TRUE));
             }
             return $frag;
         }
@@ -326,7 +333,7 @@ namespace TheSeer\fDOM {
          *
          * @return \DOMNodeList
          */
-        public function query($q, \DOMNode $ctx = null, $registerNodeNS = true) {
+        public function query($q, \DOMNode $ctx = NULL, $registerNodeNS = TRUE) {
             if (is_null($this->xp)) {
                 $this->getDOMXPath();
             }
@@ -342,7 +349,7 @@ namespace TheSeer\fDOM {
          *
          * @return fDOMNode
          */
-        public function queryOne($q, \DOMNode $ctx = null, $registerNodeNS = true) {
+        public function queryOne($q, \DOMNode $ctx = NULL, $registerNodeNS = TRUE) {
             if (is_null($this->xp)) {
                 $this->getDOMXPath();
             }
@@ -394,7 +401,7 @@ namespace TheSeer\fDOM {
          *
          * @return void
          */
-        public function registerPHPFunctions($restrict = null) {
+        public function registerPHPFunctions($restrict = NULL) {
             if (is_null($this->xp)) {
                 $this->getDOMXPath();
             }
@@ -416,7 +423,7 @@ namespace TheSeer\fDOM {
          *
          * @return fDOMElement Reference to created fDOMElement
          */
-        public function createElementPrefix($prefix, $name, $content = null, $asTextNode = false) {
+        public function createElementPrefix($prefix, $name, $content = NULL, $asTextNode = FALSE) {
             if (!isset($this->prefixes[$prefix])) {
                 throw new fDOMException("'$prefix' not bound", fDOMException::UnboundPrefix);
             }
@@ -434,13 +441,13 @@ namespace TheSeer\fDOM {
          *
          * @return fDOMElement Reference to created fDOMElement
          */
-        public function createElement($name, $content = null, $asTextnode = false) {
+        public function createElement($name, $content = NULL, $asTextnode = FALSE) {
             try {
                 $node = parent::createElement($name);
                 if (!$node) {
                     throw new fDOMException("Creating element with name '$name' failed", fDOMException::NameInvalid);
                 }
-                if ($content !== null) {
+                if ($content !== NULL) {
                     if ($asTextnode) {
                         $node->appendChild($this->createTextnode($content));
                     } else {
@@ -468,12 +475,12 @@ namespace TheSeer\fDOM {
          *
          * @return fDOMElement
          */
-        public function createElementNS($namespace, $name, $content = null, $asTextNode = false) {
+        public function createElementNS($namespace, $name, $content = NULL, $asTextNode = FALSE) {
             $node = parent::createElementNS($namespace, $name);
             if (!$node) {
                 throw new fDOMException("Creating element with name '$name' failed", fDOMException::NameInvalid);
             }
-            if ($content !== null) {
+            if ($content !== NULL) {
                 if ($asTextNode) {
                     $node->appendChild($this->createTextnode($content));
                 } else {
@@ -509,7 +516,7 @@ namespace TheSeer\fDOM {
          *
          * @return fDOMElement Reference to created fDOMElement
          */
-        public function appendElement($name, $content = null, $asTextNode = false) {
+        public function appendElement($name, $content = NULL, $asTextNode = FALSE) {
             return $this->appendChild(
                 $this->createElement($name, $content, $asTextNode)
             );
@@ -524,7 +531,7 @@ namespace TheSeer\fDOM {
          *
          * @return fDOMElement Reference to created fDOMElement
          */
-        public function appendElementNS($ns, $name, $content = null, $asTextNode = false) {
+        public function appendElementNS($ns, $name, $content = NULL, $asTextNode = FALSE) {
             return $this->appendChild(
                 $this->createElementNS($ns, $name, $content, $asTextNode)
             );
