@@ -55,6 +55,9 @@ Usage Samples
     
 Changelog
 ---------
+#####Release 1.3.2
+* Added __clone method to reset domxpath object when domdocument gets cloned (Thanks to Markus Ineichen for pointing it out)
+
 #####Release 1.3.1
 * PHP 5.3 compatibility: changed interal behavior for incompatible changes from PHP 5.3 to 5.4 (Thanks to Jens Graefe for pointing it out)
 
