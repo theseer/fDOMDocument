@@ -283,6 +283,19 @@ namespace TheSeer\fDOM\Tests {
         }
 
         /**
+         * @covers \TheSeer\fDOM\fDOMDocument::__clone
+         */
+        public function testRegisteredNamespacePrefixesGetCopiedToClonedDocument() {
+            $this->dom->loadXML('<?xml version="1.0" ?><foo:test xmlns:foo="test:uri" />');
+            $this->dom->registerNamespace('foo', 'test:uri');
+
+            $clone = clone $this->dom;
+
+            $node = $clone->queryOne('//foo:test');
+            $this->assertSame($clone->documentElement, $node);
+        }
+
+        /**
          * https://github.com/theseer/fDOMDocument/issues/15
          */
         public function testQueryReturnsNodeFromClonedDocument() {
