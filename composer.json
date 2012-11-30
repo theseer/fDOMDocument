@@ -1,5 +1,5 @@
 {
-    "name": "theseer/f-dom-document",
+    "name": "theseer/fdomdocument",
     "description": "The classes contained within this repository extend the standard DOM to use exceptions at all occasions of errors instead of PHP warnings or notices. They also add various custom methods and shortcuts for convinience and to simplify the usage of DOM.",
     "homepage": "https://github.com/theseer/fDOMDocument",
     "license": "BSD-3-Clause",
