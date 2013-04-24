@@ -41,29 +41,8 @@
 
 namespace TheSeer\fDOM {
 
-    /**
-     * fDomNode
-     *
-     * @category  PHP
-     * @package   TheSeer\fDOM
-     * @author    Arne Blankerts <arne@blankerts.de>
-     * @access    public
-     *
-     */
-    class fDOMNode extends \DOMNode {
-
-        /**
-         * Check if the given node is in the same document
-         *
-         * @param \DomNode $node Node to compare with
-         *
-         * @return boolean true on match, false if they differ
-         *
-         */
-        public function inSameDocument(\DOMNode $node) {
-            return $this->ownerDocument->inSameDocument($node);
-        }
-
-    } // fDOMNode
+    class XPathQueryException extends \Exception {
+        const KeyNotFound = 1;
+    }
 
 }

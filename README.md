@@ -37,24 +37,27 @@ drop in replacement for DOMDocument.
 Usage Samples
 -------------
     <?php
-    
+
     require 'TheSeer/fDOMDocument/autoload.php';
-    
+
     $dom = new TheSeer\fDOM\fDOMDOcument();
     try {
         $dom->loadXML('<?xml version="1.0" ?><root><child name="foo" /></root>');
     } catch (fDOMException $e) {
         die($e);
     }
-    
+
     $child = $dom->queryOne('//child');
     print_r($child->getAttribute('name'));
     print_r($child->getAttribute('missing','DefaultValue'));
-    
+
     ?>
-    
+
 Changelog
 ---------
+#####Release 1.4.0
+* Added XPathQuery helper object, allowing for a prepared statement alike API around XPath
+
 #####Release 1.3.2
 * Added __clone method to reset domxpath object when domdocument gets cloned (Thanks to Markus Ineichen for pointing it out)
 
