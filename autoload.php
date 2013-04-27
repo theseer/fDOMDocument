@@ -12,7 +12,6 @@ spl_autoload_register(
                 'theseer\\fdom\\fdomelement' => '/src/fDOMElement.php',
                 'theseer\\fdom\\fdomexception' => '/src/fDOMException.php',
                 'theseer\\fdom\\fdomnode' => '/src/fDOMNode.php',
-                'theseer\\fdom\\fdomnodeinterface' => '/src/fDOMNodeInterface.php',
                 'theseer\\fdom\\fdomxpath' => '/src/fDOMXPath.php',
                 'theseer\\fdom\\xpathquery' => '/src/XPathQuery.php',
                 'theseer\\fdom\\xpathqueryexception' => '/src/XPathQueryException.php'
