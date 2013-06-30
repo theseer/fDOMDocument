@@ -96,11 +96,15 @@ namespace TheSeer\fDOM {
         /**
          * Reset XPath object so the clone gets a new instance when needed
          */
-        function __clone() {
+        public function __clone() {
             $this->xp = new fDOMXPath($this);
             foreach($this->prefixes as $prefix => $uri) {
                 $this->xp->registerNamespace($prefix, $uri);
             }
+        }
+
+        public function __toString() {
+            return $this->C14N();
         }
 
         /**

@@ -52,6 +52,10 @@ namespace TheSeer\fDOM {
      */
     class fDOMNode extends \DOMNode {
 
+        public function __toString() {
+            return $this->C14N();
+        }
+
         /**
          * Check if the given node is in the same document
          *

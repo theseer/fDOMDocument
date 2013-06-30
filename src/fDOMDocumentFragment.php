@@ -52,6 +52,10 @@ namespace TheSeer\fDOM {
      */
     class fDOMDocumentFragment extends \DOMDocumentFragment {
 
+        public function __toString() {
+            return $this->C14N();
+        }
+
         /**
          * Wrapper to standard method with exception support
          *

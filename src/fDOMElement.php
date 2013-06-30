@@ -52,6 +52,10 @@ namespace TheSeer\fDOM {
      */
     class fDOMElement extends \DOMElement {
 
+        public function __toString() {
+            return $this->C14N();
+        }
+
         /**
          * Forward to fDomDocument->query()
          *
