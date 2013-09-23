@@ -9,8 +9,8 @@
                       http://pear.php.net/dtd/package-2.0.xsd">
  <name>fDOMDocument</name>
  <channel>pear.netpirates.net</channel>
- <summary>An Extension to PHP's standard DOM to add various convinience methods and exceptions by default</summary>
- <description>An Extension to PHP's standard DOM to add various convinience methods and exceptions by default.</description>
+ <summary>An Extension to PHP's standard DOM to add various convenience methods and exceptions by default</summary>
+ <description>An Extension to PHP's standard DOM to add various convenience methods and exceptions by default.</description>
  <lead>
   <name>Arne Blankerts</name>
   <user>theseer</user>
