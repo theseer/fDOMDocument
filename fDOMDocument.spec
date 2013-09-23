@@ -1,14 +1,14 @@
 %define _pearDir /usr/share/pear/
 %define _sourcedir src/
 
-Summary: fDOMDocument - An Extension to PHP's standard DOM to add various convinience methods and exceptions by default
+Summary: fDOMDocument - An Extension to PHP's standard DOM to add various convenience methods and exceptions by default
 Name: fDOMDocument
 Version: 1.1.0
 Release: 1
 Group: System Environment/Libraries
 License: Arne Blankerts
 Vendor: Arne Blankerts
-Url: https://github.com/theseer/
+URL: https://github.com/theseer/
 #Source: 
 Provides: fDOMDocument-%{version}%{release}
 
@@ -18,7 +18,7 @@ BuildArch: noarch
 Requires: php-common, php-dom
 
 %description
-fDOMDocument - An Extension to PHP's standard DOM to add various convinience methods and exceptions by default
+fDOMDocument - An Extension to PHP's standard DOM to add various convenience methods and exceptions by default
 
 %install
 [ "$RPM_BUILD_ROOT" != "/" ] && rm -rf $RPM_BUILD_ROOT
