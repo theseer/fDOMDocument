@@ -14,12 +14,9 @@ Requirements
 
 Installation
 ------------
-fDOMDocument can be installed using
-* composer
-* the PEAR Installer
-* RPM (on Fedora / Redhat / CentOS)
+Apart from cloning this repository, fDOMDocument can be installed using by any of the following methods.
 
-#Composer
+#####Composer
 As fDOMDocument is a library and does not provide any cli tools, you can only add it to your own project:
 
     {
@@ -28,7 +25,7 @@ As fDOMDocument is a library and does not provide any cli tools, you can only ad
         }
     }
 
-#PEAR
+#####PEAR
 The following two commands are all that is required to install fDOMDocument using the PEAR Installer:
 
     sudo pear channel-discover pear.netpirates.net
@@ -37,7 +34,7 @@ The following two commands are all that is required to install fDOMDocument usin
 After the installation you can find the source files inside your local PEAR directory; the path is usually either
 ``/usr/share/pear/TheSeer/fDOMDocument`` (Fedora/Redhat) or ``/usr/lib/php/TheSeer/fDOMDocument`` (Debian/Ubuntu).
 
-#YUM (Fedora / Redhat / CentOS)
+#####YUM (Fedora / Redhat / CentOS)
 The following command will install fDOMDocument via its RPM package:
 
     sudo yum install php-theseer-fDOMDocument
@@ -71,7 +68,7 @@ Usage Samples
 Changelog
 ---------
 #####Release 1.4.3
-* Added <code>saveXML</code> and <code>saveHTML<code/> to <code>fDOMNode</code> and <code>fDOMElement</code> as a
+* Added <code>saveXML</code> and <code>saveHTML</code> to <code>fDOMNode</code> and <code>fDOMElement</code> as a
   shortcut to calling those methods on the ownerDocument
 
 #####Release 1.4.2
