@@ -5,6 +5,9 @@ The classes contained within this repository extend the standard DOM to use exce
 all occasions of errors instead of PHP warnings or notices. They also add various custom methods
 and shortcuts for convenience and to simplify the usage of DOM.
 
+[![Build Status](https://travis-ci.org/theseer/fDOMDocument.png)](https://travis-ci.org/theseer/fDOMDocument)
+
+
 Requirements
 ------------
 
