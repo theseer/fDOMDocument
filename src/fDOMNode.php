@@ -68,6 +68,26 @@ namespace TheSeer\fDOM {
             return $this->ownerDocument->inSameDocument($node);
         }
 
+        /**
+         * Wrapper to DomDocument::saveXML() with current node as context
+         *
+         * @return string
+         */
+        public function saveXML() {
+            return $this->ownerDocument->saveXML($this);
+        }
+
+        /**
+         * Wrapper to DomDocument::saveHTML() with current node as context
+         *
+         * @return string
+         */
+        public function saveHTML() {
+            return $this->ownerDocument->saveHTML($this);
+        }
+
+
+
     } // fDOMNode
 
 }
