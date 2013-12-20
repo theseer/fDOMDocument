@@ -14,11 +14,21 @@ Requirements
 
 Installation
 ------------
-fDOMDocument can be installed using the PEAR Installer, the backbone of the PHP Extension and Application Repository that provides a distribution system for PHP packages.
+fDOMDocument can be installed using
+* composer
+* the PEAR Installer
+* RPM (on Fedora / Redhat / CentOS)
 
-Depending on your OS distribution and/or your PHP environment, you may need to install PEAR or update your existing PEAR installation before you can proceed with the instructions in this chapter.
-``sudo pear upgrade PEAR`` usually suffices to upgrade an existing PEAR installation. The PEAR Manual explains how to perform a fresh installation of PEAR.
+#Composer
+As fDOMDocument is a library and does not provide any cli tools, you can only add it to your own project:
 
+    {
+        "require": {
+            "theseer/fdomdocument": "1.4.2"
+        }
+    }
+
+#PEAR
 The following two commands are all that is required to install fDOMDocument using the PEAR Installer:
 
     sudo pear channel-discover pear.netpirates.net
@@ -26,6 +36,11 @@ The following two commands are all that is required to install fDOMDocument usin
 
 After the installation you can find the source files inside your local PEAR directory; the path is usually either
 ``/usr/share/pear/TheSeer/fDOMDocument`` (Fedora/Redhat) or ``/usr/lib/php/TheSeer/fDOMDocument`` (Debian/Ubuntu).
+
+#YUM (Fedora / Redhat / CentOS)
+The following command will install fDOMDocument via its RPM package:
+
+    sudo yum install php-theseer-fDOMDocument
 
 
 Usage
@@ -55,11 +70,21 @@ Usage Samples
 
 Changelog
 ---------
+#####Release 1.4.3
+* Added <code>saveXML</code> and <code>saveHTML<code/> to <code>fDOMNode</code> and <code>fDOMElement</code> as a
+  shortcut to calling those methods on the ownerDocument
+
+#####Release 1.4.2
+* Added <code>__toString</code> support to <code>fDOMNode</code>, <code>fDOMElement</code>, <code>fDOMDocument</code> and <code>fDOMDocumentFragment</code>
+
+#####Release 1.4.1
+* Removed unused Interface <code>fDOMNodeInterface</code> from code base
+
 #####Release 1.4.0
 * Added XPathQuery helper object, allowing for a prepared statement alike API around XPath
 
 #####Release 1.3.2
-* Added __clone method to reset domxpath object when domdocument gets cloned (Thanks to Markus Ineichen for pointing it out)
+* Added <code>__clone</code> method to reset domxpath object when domdocument gets cloned (Thanks to Markus Ineichen for pointing it out)
 
 #####Release 1.3.1
 * PHP 5.3 compatibility: changed interal behavior for incompatible changes from PHP 5.3 to 5.4 (Thanks to Jens Graefe for pointing it out)
