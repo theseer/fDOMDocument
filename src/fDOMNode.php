@@ -57,6 +57,46 @@ namespace TheSeer\fDOM {
         }
 
         /**
+         * Forward to fDomDocument->query()
+         *
+         * @param string   $q               XPath to use
+         * @param \DOMNode $ctx             \DOMNode to overwrite context
+         * @param boolean  $registerNodeNS  Register flag pass thru
+         *
+         * @return \DomNodeList
+         */
+        public function query($q, \DOMNode $ctx = null, $registerNodeNS = true) {
+            return $this->ownerDocument->query($q, $ctx ? $ctx : $this, $registerNodeNS);
+        }
+
+        /**
+         * Forward to fDomDocument->queryOne()
+         *
+         * @param string   $q               XPath to use
+         * @param \DOMNode $ctx             (optional) \DOMNode to overwrite context
+         * @param boolean  $registerNodeNS  Register flag pass thru
+         *
+         * @return mixed
+         */
+        public function queryOne($q, \DOMNode $ctx = null, $registerNodeNS = true) {
+            return $this->ownerDocument->queryOne($q, $ctx ? $ctx : $this, $registerNodeNS);
+        }
+
+        /**
+         * Forward to fDomDocument->select()
+         *
+         * @param string   $selector A CSS Level 3 Selector string
+         * @param \DOMNode $ctx
+         * @param bool     $registerNodeNS
+         *
+         * @return \DOMNodeList
+         */
+
+        public function select($selector, \DOMNode $ctx = null, $registerNodeNS = true) {
+            return $this->ownerDocument->select($selector, $ctx, $registerNodeNS);
+        }
+
+        /**
          * Check if the given node is in the same document
          *
          * @param \DomNode $node Node to compare with

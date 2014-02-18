@@ -83,6 +83,20 @@ namespace TheSeer\fDOM {
         }
 
         /**
+         * Forward to fDomDocument->select()
+         *
+         * @param string   $selector A CSS Level 3 Selector string
+         * @param \DOMNode $ctx
+         * @param bool     $registerNodeNS
+         *
+         * @return \DOMNodeList
+         */
+
+        public function select($selector, \DOMNode $ctx = null, $registerNodeNS = true) {
+            return $this->ownerDocument->select($selector, $ctx, $registerNodeNS);
+        }
+
+        /**
          * Parse and append XML String to node
          *
          * @param String $str string to process

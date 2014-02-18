@@ -20,7 +20,7 @@
 
  <target name="phpab">
   <exec executable="phpab">
-   <arg line='-o autoload.php -b . src' />
+   <arg line='-o src/autoload.php src' />
   </exec>
  </target>
 

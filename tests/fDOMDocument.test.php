@@ -305,6 +305,23 @@ namespace TheSeer\fDOM\Tests {
 
         }
 
+        public function testCSSSelectorReturnsCorrectNodes() {
+            $this->dom->load(__DIR__ . '/_data/selector.xml');
+            $result = $this->dom->select('child');
+            $this->assertEquals(2, $result->length);
+            $this->assertEquals('child', $result->item(0)->nodeName);
+            $this->assertEquals('child', $result->item(1)->nodeName);
+        }
+
+        public function testCSSSelectorHonorsContextNode() {
+            $this->dom->load(__DIR__ . '/_data/selector.xml');
+            $ctx = $this->dom->getElementsByTagName('child')->item(0);
+            $result = $this->dom->select('child', $ctx);
+            $this->assertEquals(1, $result->length);
+            $this->assertEquals('child', $result->item(0)->nodeName);
+            $this->assertEquals('other', $result->item(0)->getAttribute('attr'));
+        }
+
     }
 
 }
