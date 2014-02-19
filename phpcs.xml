@@ -33,7 +33,7 @@
  <rule ref="Generic.PHP.NoSilencedErrors"/>
 
  <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
- 
+
  <!-- Namespace handling broken, so disabled -->
  <!--<rule ref="Generic.WhiteSpace.ScopeIndent"/>-->
  <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>

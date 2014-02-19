@@ -9,7 +9,7 @@ Group: System Environment/Libraries
 License: Arne Blankerts
 Vendor: Arne Blankerts
 URL: https://github.com/theseer/
-#Source: 
+#Source:
 Provides: fDOMDocument-%{version}%{release}
 
 BuildRoot: %{_tmppath}/%{name}-%{version}%{release}-root-%(%{__id_u} -n)
