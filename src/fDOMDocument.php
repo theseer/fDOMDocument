@@ -520,6 +520,10 @@ namespace TheSeer\fDOM {
             return $this->ensureIntance($node);
         }
 
+        public function createDocumentFragment() {
+            return $this->ensureIntance(parent::createDocumentFragment());
+        }
+
         /**
          * Check if the given node is in the same document
          *
