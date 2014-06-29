@@ -75,7 +75,7 @@ namespace TheSeer\fDOM\Tests {
          * @expectedException TheSeer\fDOM\fDOMException
          */
         public function testTryingToAppendInvalidXMLToFragmentThrowsException() {
-            $node = $this->frag->appendXML(NULL);
+            $node = $this->frag->appendXML('<foo');
         }
 
         public function testCheckingInSameDocumentReturnsTrueOnNodeFromFragment() {
