@@ -329,7 +329,7 @@ namespace TheSeer\fDOM {
             foreach($list as $node) {
                 $frag->appendChild($move ? $node : $node->cloneNode(TRUE));
             }
-            return $frag;
+            return $this->ensureIntance($frag);
         }
 
         /**
@@ -483,10 +483,11 @@ namespace TheSeer\fDOM {
                         throw new fDOMException("Setting content value failed", fDOMException::SetFailedError);
                     }
                 }
+                return $this->ensureIntance($node);
             } catch (\DOMException $e) {
                 throw new fDOMException("Creating elemnt with name '$name' failed", 0, $e);
             }
-            return $node;
+
         }
 
         /**
@@ -516,7 +517,7 @@ namespace TheSeer\fDOM {
                     throw new fDOMException("Setting content value failed", fDOMException::SetFailedError);
                 }
             }
-            return $node;
+            return $this->ensureIntance($node);
         }
 
         /**
@@ -561,6 +562,21 @@ namespace TheSeer\fDOM {
             return $this->appendChild(
                 $this->createElementNS($ns, $name, $content, $asTextNode)
             );
+        }
+
+        /**
+         * This is a workaround for hhvm's broken registerNodeClass handling
+         * (https://github.com/facebook/hhvm/issues/1848)
+         *
+         * @param \DOMNode $node
+         *
+         * @return \DOMNode
+         */
+        private function ensureIntance(\DOMNode $node) {
+            if ($node instanceof fDOMNode || $node instanceof fDOMElement || $node instanceof fDOMDocumentFragment) {
+                return $node;
+            }
+            return $this->importNode($node, TRUE);
         }
 
     } // fDOMDocument
