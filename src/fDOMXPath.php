@@ -71,7 +71,7 @@ namespace TheSeer\fDOM {
 
         public function query($q, \DOMNode $ctx = null, $registerNodeNS = true) {
             libxml_clear_errors();
-            if (version_compare(PHP_VERSION, '5.3.3', '<') || strpos(PHP_VERSION, 'hiphop')) {
+            if (version_compare(PHP_VERSION, '5.3.3', '<') || strpos(PHP_VERSION, 'hiphop') || strpos(PHP_VERSION, 'hhvm')) {
                 $rc = parent::query($q, ($ctx instanceof \DOMNode) ? $ctx : $this->doc->documentElement);
             } else {
                 $rc = parent::query($q, ($ctx instanceof \DOMNode) ? $ctx : $this->doc->documentElement, $registerNodeNS);
@@ -85,7 +85,7 @@ namespace TheSeer\fDOM {
 
         public function evaluate($q, \DOMNode $ctx = null, $registerNodeNS = true) {
             libxml_clear_errors();
-            if (version_compare(PHP_VERSION, '5.3.3', '<') || strpos(PHP_VERSION, 'hiphop')) {
+            if (version_compare(PHP_VERSION, '5.3.3', '<') || strpos(PHP_VERSION, 'hiphop') || strpos(PHP_VERSION, 'hhvm')) {
                 $rc = parent::evaluate($q, ($ctx instanceof \DOMNode) ? $ctx : $this->doc->documentElement);
             } else {
                 $rc = parent::evaluate($q, ($ctx instanceof \DOMNode) ? $ctx : $this->doc->documentElement, $registerNodeNS);
