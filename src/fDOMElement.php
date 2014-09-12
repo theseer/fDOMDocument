@@ -168,6 +168,44 @@ namespace TheSeer\fDOM {
         }
 
         /**
+         * Create a new fDOMElement
+         *
+         * @see fDOMDocument::createElement
+         *
+         * @return fDOMElement
+         */
+        public function createElement($name, $content = NULL, $asTextnode = FALSE) {
+            return $this->ownerDocument->createElement($name, $content, $asTextnode);
+        }
+
+        /**
+         * Create a new fDOMElement in namespace defined by prefix
+         *
+         * @see fDOMDocument::createElementPrefix
+         *
+         * @return fDOMElement
+         */
+        public function createElementPrefix($prefix, $name, $content = NULL, $asTextNode = FALSE) {
+            return $this->ownerDocument->createElementPrefix($prefix, $name, $content, $asTextNode);
+        }
+
+        /**
+         * Create a new fDOMElement within given namespace and return it
+         *
+         * @param string $namespace Namespace URI for node to create
+         * @param string $name Name of node to create
+         * @param null $content Content to set (optional)
+         * @param bool $asTextNode Create content as textNode rather then setting nodeValue
+         *
+         * @throws fDOMException
+         *
+         * @return fDOMElement
+         */
+        public function createElementNS($namespace, $name, $content = NULL, $asTextNode = FALSE) {
+            return $this->ownerDocument->createElementNS($namespace, $name, $content, $asTextNode);
+        }
+
+        /**
          * Wrapper to DomElement->getAttribute with default value option
          *
          * Note: A set but emptry attribute does NOT trigger use of the default
