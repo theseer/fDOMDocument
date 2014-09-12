@@ -231,7 +231,7 @@ namespace TheSeer\fDOM {
         public function save($filename, $options = NULL) {
             $tmp = parent::save($filename, $options);
             if (!$tmp) {
-                throw new fDOMException('saving xml file failed', fDOMException::SaveError);
+                throw new fDOMException("Saving XML to file '$filename' failed", fDOMException::SaveError);
             }
             return $tmp;
         }
@@ -250,7 +250,7 @@ namespace TheSeer\fDOM {
             }
             $tmp = parent::saveHTML($node);
             if (!$tmp) {
-                throw new fDOMException('serializing to HTML failed', fDOMException::SaveError);
+                throw new fDOMException('Serializing to HTML failed', fDOMException::SaveError);
             }
             return $tmp;
         }
@@ -268,7 +268,7 @@ namespace TheSeer\fDOM {
         public function saveHTMLFile($filename, $options = NULL) {
             $tmp = parent::saveHTMLFile($filename, $options);
             if (!$tmp) {
-                throw new fDOMException('saving to HTML file failed', fDOMException::SaveError);
+                throw new fDOMException("Saving HTML to file '$filename' failed", fDOMException::SaveError);
             }
             return $tmp;
         }
@@ -287,7 +287,7 @@ namespace TheSeer\fDOM {
             try {
                 $tmp = parent::saveXML($node, $options);
                 if (!$tmp) {
-                    throw new fDOMException('serializing to XML failed', fDOMException::SaveError);
+                    throw new fDOMException('Serializing to XML failed', fDOMException::SaveError);
                 }
                 return $tmp;
             } catch (\Exception $e) {
