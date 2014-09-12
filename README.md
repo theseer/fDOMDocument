@@ -24,7 +24,7 @@ As fDOMDocument is a library and does not provide any cli tools, you can only ad
 
     {
         "require": {
-            "theseer/fdomdocument": "1.5.0"
+            "theseer/fdomdocument": "1.6.0"
         }
     }
 
@@ -70,6 +70,13 @@ Usage Samples
 
 Changelog
 ---------
+#####Release 1.6.0
+* Added <code>createElement*</code> to <code>fDOMEmenet<code> and <code>fDOMDocumentFragment</code> as shortcuts
+* Added <code>appendElement*</code> to <code>fDOMDocumentFragment</code> as shortcuts
+* Enhanced the exception messages of save errors with filenames to contain the filename
+* Fixed fDomDocumentFragment::__toString to actually work
+* Updated / Added some tests
+
 #####Release 1.5.0
 * Added <code>select</code> to <code>fDOMDocument</code>,<code>fDOMElement</code> and <code>fDOMNode</code> to support
   CSS Selectors in favor of XPath only to find nodes
