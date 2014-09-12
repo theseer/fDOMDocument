@@ -72,10 +72,10 @@ namespace TheSeer\fDOM\Tests {
         }
 
         /**
-         * @expectedException TheSeer\fDOM\fDOMException
+         * @expectedException \TheSeer\fDOM\fDOMException
          */
         public function testTryingToAppendInvalidXMLToFragmentThrowsException() {
-            $node = $this->frag->appendXML('<foo');
+            $this->frag->appendXML('<foo');
         }
 
         public function testCheckingInSameDocumentReturnsTrueOnNodeFromFragment() {
@@ -83,6 +83,47 @@ namespace TheSeer\fDOM\Tests {
             $this->assertTrue($this->frag->inSameDocument($this->frag->firstChild));
         }
 
-    }
+        public function testAppendingANewElement() {
+            $node = $this->frag->appendElement('append', 'text');
+            $this->assertInstanceOf('TheSeer\fDOM\fDOMElement', $node);
+            $this->assertEquals(1, $this->frag->query('count(append)'));
+            $this->assertEquals('text', $node->nodeValue);
+        }
 
+        public function testAppendingANewElementWithinANamespace() {
+            $node = $this->frag->appendElementNS('test:uri', 'append', 'text');
+            $this->dom->registerNamespace('t', 'test:uri');
+            $this->assertInstanceOf('TheSeer\fDOM\fDOMElement', $node);
+            $this->assertEquals(1, $this->frag->query('count(t:append)'));
+            $this->assertEquals('text', $node->nodeValue);
+        }
+
+        public function testAppendingANewElementWithinANamespaceByPrefix() {
+            $this->dom->registerNamespace('t', 'test:uri');
+            $node = $this->frag->appendElementPrefix('t', 'append', 'text');
+            $this->assertInstanceOf('TheSeer\fDOM\fDOMElement', $node);
+            $this->assertEquals(1, $this->frag->query('count(t:append)'));
+            $this->assertEquals('text', $node->nodeValue);
+        }
+
+        public function testAppendingATextAsTextnode() {
+            $node = $this->frag->appendTextNode('test & demo');
+            $found = $this->frag->queryOne('text()');
+            $this->assertSame($node, $found);
+            $this->assertEquals('test & demo', $node->nodeValue);
+        }
+
+        public function testCSSSelectorReturnsCorrectNodes() {
+            $node = $this->frag->appendElement('append', 'text');
+            $result = $this->frag->select('append');
+            $this->assertSame($node, $result->item(0));
+            $this->assertEquals(1, $result->length);
+        }
+
+        public function testToStringReturnsSerializedXMLString() {
+            $this->frag->appendElement('append', 'text');
+            $this->assertEquals('<append>text</append>', (string)$this->frag);
+        }
+
+    }
 }
