@@ -24,7 +24,7 @@ As fDOMDocument is a library and does not provide any cli tools, you can only ad
 
     {
         "require": {
-            "theseer/fdomdocument": "1.6.0"
+            "theseer/fdomdocument": "1.6.*"
         }
     }
 
