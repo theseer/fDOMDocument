@@ -55,7 +55,7 @@ Usage Samples
 
     require 'TheSeer/fDOMDocument/autoload.php';
 
-    $dom = new TheSeer\fDOM\fDOMDOcument();
+    $dom = new TheSeer\fDOM\fDOMDocument();
     try {
         $dom->loadXML('<?xml version="1.0" ?><root><child name="foo" /></root>');
     } catch (fDOMException $e) {
