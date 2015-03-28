@@ -48,6 +48,7 @@ namespace TheSeer\fDOM {
      * @package   TheSeer\fDOM
      * @author    Arne Blankerts <arne@blankerts.de>
      * @access    public
+     * @property  fDomDocument $ownerDocument
      *
      */
     class fDOMDocumentFragment extends \DOMDocumentFragment {
