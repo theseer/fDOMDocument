@@ -68,6 +68,8 @@ namespace TheSeer\fDOM {
         }
 
         /**
+         * Set Query.
+         *
          * @param string $query
          */
         private function setQuery($query) {
@@ -79,7 +81,7 @@ namespace TheSeer\fDOM {
         }
 
         /**
-         * Returns keys
+         * Returns keys.
          *
          * @return array
          */
@@ -88,6 +90,8 @@ namespace TheSeer\fDOM {
         }
 
         /**
+         * Bind value to key.
+         *
          * @param string $key
          * @param string $value
          *
@@ -101,6 +105,8 @@ namespace TheSeer\fDOM {
         }
 
         /**
+         * Generate query.
+         *
          * @param \DOMNode $ctx
          * @param array $values
          *
@@ -111,6 +117,8 @@ namespace TheSeer\fDOM {
         }
 
         /**
+         * Evaluate Query.
+         *
          * @param \DOMNode $ctx
          * @param array $values
          * @param bool $registerNodeNS
@@ -125,6 +133,8 @@ namespace TheSeer\fDOM {
         }
 
         /**
+         * Execute Query.
+         *
          * @param \DOMNode $ctx
          * @param array $values
          * @param bool $registerNodeNS
@@ -139,11 +149,13 @@ namespace TheSeer\fDOM {
         }
 
         /**
+         * Execute Query and return first result.
+         *
          * @param \DOMNode $ctx
          * @param array $values
          * @param bool $registerNodeNS
          *
-         * @return \DOMNode|mixed
+         * @return \DOMNode
          */
         public function queryOne(\DOMNode $ctx, array $values = NULL, $registerNodeNS = TRUE) {
             $xp = $this->getXPathObjectFor($ctx);
@@ -151,6 +163,8 @@ namespace TheSeer\fDOM {
         }
 
         /**
+         * Return xPath for node
+         *
          * @param \DOMNode $ctx
          *
          * @throws fDOMException
@@ -166,6 +180,8 @@ namespace TheSeer\fDOM {
         }
 
         /**
+         * Build query using values.
+         *
          * @param fDOMXPath $xp
          * @param array $values
          *

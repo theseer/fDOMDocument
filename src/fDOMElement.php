@@ -48,7 +48,7 @@ namespace TheSeer\fDOM {
      * @package   TheSeer\fDOM
      * @author    Arne Blankerts <arne@blankerts.de>
      * @access    public
-     * @property  fDomDocument $ownerDocument
+     * @property  fDOMDocument $ownerDocument
      *
      */
     class fDOMElement extends \DOMElement {

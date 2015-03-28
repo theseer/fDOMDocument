@@ -17,6 +17,8 @@ namespace TheSeer\fDOM\CSS {
         }
 
         /**
+         * Build query from matches.
+         *
          * @param array $matches
          *
          * @return string
