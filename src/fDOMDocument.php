@@ -243,9 +243,10 @@ namespace TheSeer\fDOM {
         /**
          * Wrapper to DOMDocument::saveHTML with exception handling
          *
-         * @param DOMNode|null $node Context DOMNode (optional)
+         * @param \DOMNode|null $node Context DOMNode (optional)
          *
          * @throws fDOMException
+         *
          * @return string html content
          */
         public function saveHTML(\DOMNode $node = NULL) {
@@ -465,7 +466,7 @@ namespace TheSeer\fDOM {
          *
          * @param string $name Name of node to create
          * @param null $content Content to set (optional)
-         * @param bool $asTextNode Create content as textNode rather then setting nodeValue
+         * @param bool $asTextnode Create content as textNode rather then setting nodeValue
          *
          * @throws fDOMException
          *
@@ -499,7 +500,7 @@ namespace TheSeer\fDOM {
          *
          * @param string $namespace Namespace URI for node to create
          * @param string $name Name of node to create
-         * @param null $content Content to set (optional)
+         * @param string $content Content to set (optional)
          * @param bool $asTextNode Create content as textNode rather then setting nodeValue
          *
          * @throws fDOMException
@@ -549,8 +550,9 @@ namespace TheSeer\fDOM {
         /**
          * Create a new element and append it as documentElement
          *
-         * @param $name     Name of not element to create
-         * @param $content  Optional content to be set
+         * @param string $name Name of not element to create
+         * @param string $content Optional content to be set
+         * @param bool $asTextNode
          *
          * @return fDOMElement Reference to created fDOMElement
          */
@@ -563,9 +565,10 @@ namespace TheSeer\fDOM {
         /**
          * Create a new element in given namespace and append it as documentElement
          *
-         * @param $ns       Namespace of node to create
-         * @param $name     Name of not element to create
-         * @param $content  Optional content to be set
+         * @param string $ns Namespace of node to create
+         * @param string $name Name of not element to create
+         * @param string $content Optional content to be set
+         * @param bool $asTextNode
          *
          * @return fDOMElement Reference to created fDOMElement
          */
