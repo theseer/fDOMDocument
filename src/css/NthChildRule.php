@@ -16,6 +16,11 @@ namespace TheSeer\fDOM\CSS {
             );
         }
 
+        /**
+         * @param array $matches
+         *
+         * @return string
+         */
         private function callback(array $matches) {
             switch($matches[2]){
                 case 'n': {

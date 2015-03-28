@@ -53,6 +53,9 @@ namespace TheSeer\fDOM {
      */
     class fDOMDocumentFragment extends \DOMDocumentFragment {
 
+        /**
+         * @return string
+         */
         public function __toString() {
             return $this->ownerDocument->saveXML($this);
         }

@@ -105,6 +105,9 @@ namespace TheSeer\fDOM {
             }
         }
 
+        /**
+         * @return string
+         */
         public function __toString() {
             return $this->C14N();
         }
@@ -521,6 +524,9 @@ namespace TheSeer\fDOM {
             return $this->ensureIntance($node);
         }
 
+        /**
+         * @return fDOMDocumentFragment
+         */
         public function createDocumentFragment() {
             return $this->ensureIntance(parent::createDocumentFragment());
         }

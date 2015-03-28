@@ -53,6 +53,9 @@ namespace TheSeer\fDOM {
      */
     class fDOMElement extends \DOMElement {
 
+        /**
+         * @return string
+         */
         public function __toString() {
             return $this->C14N();
         }
@@ -173,6 +176,10 @@ namespace TheSeer\fDOM {
          *
          * @see fDOMDocument::createElement
          *
+         * @param string $name
+         * @param string $content
+         * @param bool $asTextnode
+         *
          * @return fDOMElement
          */
         public function createElement($name, $content = NULL, $asTextnode = FALSE) {
@@ -183,6 +190,11 @@ namespace TheSeer\fDOM {
          * Create a new fDOMElement in namespace defined by prefix
          *
          * @see fDOMDocument::createElementPrefix
+         *
+         * @param string $prefix
+         * @param string $name
+         * @param string $content
+         * @param bool $asTextNode
          *
          * @return fDOMElement
          */

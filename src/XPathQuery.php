@@ -78,10 +78,21 @@ namespace TheSeer\fDOM {
             }
         }
 
+        /**
+         * Returns keys
+         *
+         * @return array
+         */
         public function getKeys() {
             return array_keys($this->values);
         }
 
+        /**
+         * @param string $key
+         * @param string $value
+         *
+         * @throws XPathQueryException
+         */
         public function bind($key, $value) {
             if (!array_key_exists($key, $this->values)) {
                 throw new XPathQueryException("'$key' not found in query'", XPathQueryException::KeyNotFound );
@@ -89,25 +100,63 @@ namespace TheSeer\fDOM {
             $this->values[$key] = $value;
         }
 
+        /**
+         * @param \DOMNode $ctx
+         * @param array $values
+         *
+         * @return string
+         */
         public function generate(\DOMNode $ctx, array $values = NULL) {
             return $this->buildQuery($this->getXPathObjectFor($ctx), $values);
         }
 
+        /**
+         * @param \DOMNode $ctx
+         * @param array $values
+         * @param bool $registerNodeNS
+         *
+         * @throws fDOMException
+         *
+         * @return mixed
+         */
         public function evaluate(\DOMNode $ctx, array $values = NULL, $registerNodeNS = TRUE) {
             $xp = $this->getXPathObjectFor($ctx);
             return $xp->evaluate($this->buildQuery($xp, $values), $ctx, $registerNodeNS);
         }
 
+        /**
+         * @param \DOMNode $ctx
+         * @param array $values
+         * @param bool $registerNodeNS
+         *
+         * @throws fDOMException
+         *
+         * @return mixed
+         */
         public function query(\DOMNode $ctx, array $values = NULL, $registerNodeNS = TRUE) {
             $xp = $this->getXPathObjectFor($ctx);
             return $xp->evaluate($this->buildQuery($xp, $values), $ctx, $registerNodeNS);
         }
 
+        /**
+         * @param \DOMNode $ctx
+         * @param array $values
+         * @param bool $registerNodeNS
+         *
+         * @return \DOMNode|mixed
+         */
         public function queryOne(\DOMNode $ctx, array $values = NULL, $registerNodeNS = TRUE) {
             $xp = $this->getXPathObjectFor($ctx);
             return $xp->queryOne($this->buildQuery($xp, $values), $ctx, $registerNodeNS);
         }
 
+        /**
+         * @param \DOMNode $ctx
+         * 
+         * @throws fDOMException
+         *
+         * @return fDOMXPath
+         */
         private function getXPathObjectFor(\DOMNode $ctx) {
             $dom = $ctx instanceof \DOMDocument ? $ctx : $ctx->ownerDocument;
             if ($dom instanceOf fDOMDocument) {
@@ -116,6 +165,14 @@ namespace TheSeer\fDOM {
             return new fDOMXPath($dom);
         }
 
+        /**
+         * @param fDOMXPath $xp
+         * @param array $values
+         *
+         * @throws XPathQueryException
+         *
+         * @return string
+         */
         private function buildQuery(fDOMXPath $xp, array $values = NULL) {
             $backup = $this->values;
             if (count($values) > 0) {
