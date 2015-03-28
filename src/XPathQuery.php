@@ -152,7 +152,7 @@ namespace TheSeer\fDOM {
 
         /**
          * @param \DOMNode $ctx
-         * 
+         *
          * @throws fDOMException
          *
          * @return fDOMXPath

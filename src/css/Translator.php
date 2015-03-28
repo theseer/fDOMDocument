@@ -150,7 +150,6 @@ namespace TheSeer\fDOM\CSS {
                 // normalize multiple filters
                 new RegexRule("/\]\[([^\]]+)/", ' and ($1)')
 
-
             );
             return $this->rules;
         }
