@@ -16,6 +16,13 @@ namespace TheSeer\fDOM\CSS {
             );
         }
 
+        /**
+         * Build query from matches.
+         *
+         * @param array $matches
+         *
+         * @return string
+         */
         private function callback(array $matches) {
             return '[substring(@' . $matches[1] . ',string-length(@' . $matches[1] . ')-' .  (strlen($matches[2]) - 3) . ')=' . $matches[1] . ']';
         }

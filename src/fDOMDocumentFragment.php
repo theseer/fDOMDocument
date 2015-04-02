@@ -48,10 +48,14 @@ namespace TheSeer\fDOM {
      * @package   TheSeer\fDOM
      * @author    Arne Blankerts <arne@blankerts.de>
      * @access    public
+     * @property  fDOMDocument $ownerDocument
      *
      */
     class fDOMDocumentFragment extends \DOMDocumentFragment {
 
+        /**
+         * @return string
+         */
         public function __toString() {
             return $this->ownerDocument->saveXML($this);
         }
@@ -61,7 +65,9 @@ namespace TheSeer\fDOM {
          *
          * @param string $str Data string to parse and append
          *
-         * @return boolean true on success
+         * @throws fDOMException
+         *
+         * @return bool true on success
          */
         public function appendXML($str) {
             if (!parent::appendXML($str)) {
@@ -175,7 +181,6 @@ namespace TheSeer\fDOM {
          *
          * @return \DOMNodeList
          */
-
         public function select($selector, \DOMNode $ctx = null, $registerNodeNS = true) {
             return $this->ownerDocument->select($selector, $ctx ? $ctx : $this, $registerNodeNS);
         }

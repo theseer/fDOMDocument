@@ -48,10 +48,14 @@ namespace TheSeer\fDOM {
      * @package   TheSeer\fDOM
      * @author    Arne Blankerts <arne@blankerts.de>
      * @access    public
+     * @property  fDOMDocument $ownerDocument
      *
      */
     class fDOMElement extends \DOMElement {
 
+        /**
+         * @return string
+         */
         public function __toString() {
             return $this->C14N();
         }
@@ -172,6 +176,10 @@ namespace TheSeer\fDOM {
          *
          * @see fDOMDocument::createElement
          *
+         * @param string $name
+         * @param string $content
+         * @param bool $asTextnode
+         *
          * @return fDOMElement
          */
         public function createElement($name, $content = NULL, $asTextnode = FALSE) {
@@ -182,6 +190,11 @@ namespace TheSeer\fDOM {
          * Create a new fDOMElement in namespace defined by prefix
          *
          * @see fDOMDocument::createElementPrefix
+         *
+         * @param string $prefix
+         * @param string $name
+         * @param string $content
+         * @param bool $asTextNode
          *
          * @return fDOMElement
          */
@@ -239,11 +252,11 @@ namespace TheSeer\fDOM {
          *
          * @param string  $attr          Attribute name to set
          * @param string  $value         Value to set attribute to
-         * @param bool $keepEntitites Flag to signale if entities should be kept
+         * @param bool $keepEntities Flag to signale if entities should be kept
          *
          * @throws fDOMException
          *
-         * @return DOMAttr
+         * @return \DOMAttr
          *
          * @see DOMElement::setAttribute()
          */
@@ -266,10 +279,11 @@ namespace TheSeer\fDOM {
          * @param string  $ns            namespace attribute should be in
          * @param string  $attr          Attribute name to set
          * @param string  $value         Value to set attribute to
-         * @param boolean $keepEntitites Flag to signale if entities should be kept
+         * @param bool    $keepEntities  Flag to signale if entities should be kept
          *
-         * @return \DOMAttr
+         * @throws fDOMException
          *
+         * @return \DOMAttr|null
          * @see DOMElement::setAttribute()
          */
         public function setAttributeNS($ns, $attr, $value, $keepEntities=false) {
@@ -322,7 +336,7 @@ namespace TheSeer\fDOM {
          *
          * @param string $tagName tagname to search for
          *
-         * @return DomNodeList
+         * @return \DOMNodeList
          */
         public function getChildrenByTagName($tagName) {
             return $this->query("*[local-name()='$tagName']");
@@ -334,7 +348,7 @@ namespace TheSeer\fDOM {
          * @param string $ns      namespace nodes have to be in
          * @param string $tagName tagname to search for
          *
-         * @return DomNodeList
+         * @return \DOMNodeList
          */
         public function getChildrenByTagNameNS($ns, $tagName) {
             return $this->query("*[local-name()='$tagName' and namespace-uri()='$ns']");

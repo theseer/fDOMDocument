@@ -52,13 +52,25 @@ namespace TheSeer\fDOM {
      */
     class fDOMXPath extends \DOMXPath {
 
+        /**
+         * @var \DOMDocument
+         */
         protected $doc;
 
+        /**
+         * @param \DOMDocument $doc
+         */
         public function __construct(\DOMDocument $doc) {
             parent::__construct($doc);
             $this->doc = $doc;
         }
 
+        /**
+         * @param string $xpath
+         * @param array $valueMap
+         *
+         * @return string
+         */
         public function prepare($xpath, array $valueMap) {
             if (count($valueMap)==0) {
                 return $xpath;
@@ -69,6 +81,15 @@ namespace TheSeer\fDOM {
             return $xpath;
         }
 
+        /**
+         * @param string $q
+         * @param \DOMNode $ctx
+         * @param bool $registerNodeNS
+         *
+         * @throws fDOMException
+         *
+         * @return \DOMNodeList
+         */
         public function query($q, \DOMNode $ctx = null, $registerNodeNS = true) {
             libxml_clear_errors();
             if (version_compare(PHP_VERSION, '5.3.3', '<') || strpos(PHP_VERSION, 'hiphop') || strpos(PHP_VERSION, 'hhvm')) {
@@ -83,6 +104,15 @@ namespace TheSeer\fDOM {
             return $rc;
         }
 
+        /**
+         * @param string $q
+         * @param \DOMNode $ctx
+         * @param bool $registerNodeNS
+         *
+         * @throws fDOMException
+         *
+         * @return mixed
+         */
         public function evaluate($q, \DOMNode $ctx = null, $registerNodeNS = true) {
             libxml_clear_errors();
             if (version_compare(PHP_VERSION, '5.3.3', '<') || strpos(PHP_VERSION, 'hiphop') || strpos(PHP_VERSION, 'hhvm')) {
@@ -96,6 +126,15 @@ namespace TheSeer\fDOM {
             return $rc;
         }
 
+        /**
+         * @param string $q
+         * @param \DOMNode $ctx
+         * @param bool $registerNodeNS
+         *
+         * @throws fDOMException
+         *
+         * @return \DOMNode|mixed
+         */
         public function queryOne($q, \DOMNode $ctx = null, $registerNodeNS = true) {
             $rc = $this->evaluate($q, $ctx, $registerNodeNS);
             if ($rc instanceof \DOMNodelist) {
@@ -104,6 +143,11 @@ namespace TheSeer\fDOM {
             return $rc;
         }
 
+        /**
+         * @param string $str
+         *
+         * @return string
+         */
         public function quote($str) {
             if (strpos($str, '"') === false) {
                 return '"'.$str.'"';

@@ -8,6 +8,9 @@ namespace TheSeer\fDOM\CSS {
          */
         private $translator;
 
+        /**
+         * @param Translator $translator
+         */
         public function __construct(Translator $translator) {
             $this->translator = $translator;
         }
@@ -25,6 +28,11 @@ namespace TheSeer\fDOM\CSS {
             );
         }
 
+        /**
+         * @param array $matches
+         *
+         * @return string
+         */
         private function callback(array $matches) {
             $subresult = preg_replace(
                 '/^[^\[]+\[([^\]]*)\].*$/',

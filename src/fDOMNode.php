@@ -48,10 +48,14 @@ namespace TheSeer\fDOM {
      * @package   TheSeer\fDOM
      * @author    Arne Blankerts <arne@blankerts.de>
      * @access    public
+     * @property  fDOMDocument $ownerDocument
      *
      */
     class fDOMNode extends \DOMNode {
 
+        /**
+         * @return string
+         */
         public function __toString() {
             return $this->C14N();
         }
@@ -60,6 +64,10 @@ namespace TheSeer\fDOM {
          * Create a new fDOMElement
          *
          * @see fDOMDocument::createElement
+         *
+         * @param string $name
+         * @param string $content
+         * @param bool $asTextnode
          *
          * @return fDOMElement
          */
@@ -71,6 +79,11 @@ namespace TheSeer\fDOM {
          * Create a new fDOMElement in namespace defined by prefix
          *
          * @see fDOMDocument::createElementPrefix
+         *
+         * @param string $prefix
+         * @param string $name
+         * @param string $content
+         * @param bool $asTextNode
          *
          * @return fDOMElement
          */
