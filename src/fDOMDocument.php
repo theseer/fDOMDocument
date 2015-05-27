@@ -87,10 +87,7 @@ namespace TheSeer\fDOM {
             libxml_use_internal_errors(TRUE);
             $rc = parent::__construct($version, $encoding);
 
-            $this->registerNodeClass('DOMDocument', get_called_class());
-            $this->registerNodeClass('DOMNode', 'TheSeer\fDOM\fDOMNode');
-            $this->registerNodeClass('DOMElement', 'TheSeer\fDOM\fDOMElement');
-            $this->registerNodeClass('DOMDocumentFragment', 'TheSeer\fDOM\fDOMDocumentFragment');
+            $this->registerNodeClasses();
 
             return $rc;
         }
@@ -99,6 +96,7 @@ namespace TheSeer\fDOM {
          * Reset XPath object so the clone gets a new instance when needed
          */
         public function __clone() {
+            $this->registerNodeClasses();
             $this->xp = new fDOMXPath($this);
             foreach($this->prefixes as $prefix => $uri) {
                 $this->xp->registerNamespace($prefix, $uri);
@@ -145,6 +143,7 @@ namespace TheSeer\fDOM {
             if (!$tmp || libxml_get_last_error()) {
                 throw new fDOMException("loading file '$fname' failed.", fDOMException::LoadError);
             }
+            $this->registerNodeClasses();
             return TRUE;
         }
 
@@ -165,6 +164,7 @@ namespace TheSeer\fDOM {
             if (!$tmp || libxml_get_last_error()) {
                 throw new fDOMException('parsing string failed', fDOMException::ParseError);
             }
+            $this->registerNodeClasses();
             return TRUE;
         }
 
@@ -192,6 +192,7 @@ namespace TheSeer\fDOM {
             if (!$tmp || libxml_get_last_error()) {
                 throw new fDOMException("loading html file '$fname' failed", fDOMException::LoadError);
             }
+            $this->registerNodeClasses();
             return TRUE;
         }
 
@@ -219,6 +220,7 @@ namespace TheSeer\fDOM {
             if (!$tmp || libxml_get_last_error()) {
                 throw new fDOMException('parsing html string failed', fDOMException::ParseError);
             }
+            $this->registerNodeClasses();
             return TRUE;
         }
 
@@ -591,6 +593,19 @@ namespace TheSeer\fDOM {
                 return $node;
             }
             return $this->importNode($node, TRUE);
+        }
+
+        /**
+         * Register replacements
+         *
+         * Called from constructor and, as a workaround for (https://github.com/facebook/hhvm/issues/5412),
+         * after load(), loadXML(), loadHTML() and loadHTMLFile()
+         */
+        private function registerNodeClasses() {
+            $this->registerNodeClass('DOMDocument', get_called_class());
+            $this->registerNodeClass('DOMNode', 'TheSeer\fDOM\fDOMNode');
+            $this->registerNodeClass('DOMElement', 'TheSeer\fDOM\fDOMElement');
+            $this->registerNodeClass('DOMDocumentFragment', 'TheSeer\fDOM\fDOMDocumentFragment');
         }
 
     } // fDOMDocument
