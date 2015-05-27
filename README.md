@@ -70,6 +70,9 @@ Usage Samples
 
 Changelog
 ---------
+#####Release 1.6.1
+* Added Workaround for [HHVM Issue #5412](https://github.com/facebook/hhvm/issues/5412)
+
 #####Release 1.6.0
 * Added <code>createElement*</code> to <code>fDOMEmenet<code> and <code>fDOMDocumentFragment</code> as shortcuts
 * Added <code>appendElement*</code> to <code>fDOMDocumentFragment</code> as shortcuts
