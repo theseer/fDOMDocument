@@ -159,6 +159,9 @@ namespace TheSeer\fDOM {
          * @return boolean
          */
         public function loadXML($source, $options = LIBXML_NONET) {
+            if ($source == '') {
+                throw new fDOMException('empty string not allowed', fDOMException::ParseError);
+            }
             $this->xp = NULL;
             $tmp = parent :: loadXML($source, $options);
             if (!$tmp || libxml_get_last_error()) {
