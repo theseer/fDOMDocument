@@ -66,7 +66,7 @@ namespace TheSeer\fDOM {
 
         /**
          * List of registered prefixes and their namespace uri
-         * @var Array
+         * @var array
          */
         private $prefixes = array();
 
@@ -113,11 +113,11 @@ namespace TheSeer\fDOM {
         /**
          * Set Stream context options
          *
-         * @param Array $options Stream context options
+         * @param array $options Stream context options
          *
          * @return boolean true on success, false on failure
          */
-        public function setStreamContext(Array $options) {
+        public function setStreamContext(array $options) {
             if (!count($options)) {
                 return FALSE;
             }
@@ -388,7 +388,7 @@ namespace TheSeer\fDOM {
          * placeholder replacement comparable to sql's prepared statements
          * .
          * @param string $xpath    String containing xpath with :placeholder markup
-         * @param array  $valueMap Array containing keys (:placeholder) and value pairs to be quoted
+         * @param array  $valueMap array containing keys (:placeholder) and value pairs to be quoted
          *
          * @return string
          */
@@ -440,7 +440,7 @@ namespace TheSeer\fDOM {
         /**
          * Forward to DOMXPath->registerPHPFunctions()
          *
-         * @param mixed $restrict Array of function names or string with functionname to restrict callabilty to
+         * @param mixed $restrict array of function names or string with functionname to restrict callabilty to
          *
          * @throws fDOMException
          *
