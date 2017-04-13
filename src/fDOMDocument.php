@@ -138,6 +138,9 @@ namespace TheSeer\fDOM {
          * @return bool|mixed
          */
         public function load($fname, $options = LIBXML_NONET) {
+            if ($fname == '') {
+                throw new fDOMException('empty filename is not allowed', fDOMException::ParseError);
+            }
             $this->xp = NULL;
             $tmp = parent :: load($fname, $options);
             if (!$tmp || libxml_get_last_error()) {
@@ -183,6 +186,9 @@ namespace TheSeer\fDOM {
          * @return boolean
          */
         public function loadHTMLFile($fname, $options = NULL) {
+            if ($fname == '') {
+                throw new fDOMException('empty filename is not allowed', fDOMException::ParseError);
+            }
             $this->xp = NULL;
             if (version_compare(PHP_VERSION, '5.4.0', '<')) {
                 if ($options != NULL) {
@@ -211,6 +217,9 @@ namespace TheSeer\fDOM {
          * @return boolean
          */
         public function loadHTML($source, $options = NULL) {
+            if ($source == '') {
+                throw new fDOMException('empty string not allowed', fDOMException::ParseError);
+            }
             $this->xp = NULL;
             if (version_compare(PHP_VERSION, '5.4.0', '<')) {
                 if ($options != NULL) {
