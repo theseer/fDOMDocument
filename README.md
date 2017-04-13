@@ -7,7 +7,6 @@ and shortcuts for convenience and to simplify the usage of DOM.
 
 [![Build Status](https://travis-ci.org/theseer/fDOMDocument.png)](https://travis-ci.org/theseer/fDOMDocument)
 
-
 Requirements
 ------------
 
@@ -19,7 +18,7 @@ Installation
 ------------
 Apart from cloning this repository, fDOMDocument can be installed using by any of the following methods.
 
-#####Composer
+##### Composer
 As fDOMDocument is a library and does not provide any cli tools, you can only add it to your own project:
 
     {
@@ -29,7 +28,7 @@ As fDOMDocument is a library and does not provide any cli tools, you can only ad
     }
 
 
-#####YUM (Fedora / Redhat / CentOS)
+##### YUM/DNF (Fedora / Redhat / CentOS)
 The following command will install fDOMDocument via its RPM package:
 
     sudo yum install php-theseer-fDOMDocument
@@ -62,45 +61,45 @@ Usage Samples
 
 Changelog
 ---------
-#####Release 1.6.2
+##### Release 1.6.2
 * Handle empty string warings from PHP
 
-#####Release 1.6.1
+##### Release 1.6.1
 * Added Workaround for [HHVM Issue #5412](https://github.com/facebook/hhvm/issues/5412)
 
-#####Release 1.6.0
+##### Release 1.6.0
 * Added <code>createElement*</code> to <code>fDOMEmenet<code> and <code>fDOMDocumentFragment</code> as shortcuts
 * Added <code>appendElement*</code> to <code>fDOMDocumentFragment</code> as shortcuts
 * Enhanced the exception messages of save errors with filenames to contain the filename
 * Fixed fDomDocumentFragment::__toString to actually work
 * Updated / Added some tests
 
-#####Release 1.5.0
+##### Release 1.5.0
 * Added <code>select</code> to <code>fDOMDocument</code>,<code>fDOMElement</code> and <code>fDOMNode</code> to support
   CSS Selectors in favor of XPath only to find nodes
 
 * Added <code>query</code> and <code>queryOne</code> forwardes to <code>fDOMNode</code>
 
-#####Release 1.4.3
+##### Release 1.4.3
 * Added <code>saveXML</code> and <code>saveHTML</code> to <code>fDOMNode</code> and <code>fDOMElement</code> as a
   shortcut to calling those methods on the ownerDocument
 
-#####Release 1.4.2
+##### Release 1.4.2
 * Added <code>__toString</code> support to <code>fDOMNode</code>, <code>fDOMElement</code>, <code>fDOMDocument</code> and <code>fDOMDocumentFragment</code>
 
-#####Release 1.4.1
+##### Release 1.4.1
 * Removed unused Interface <code>fDOMNodeInterface</code> from code base
 
-#####Release 1.4.0
+##### Release 1.4.0
 * Added XPathQuery helper object, allowing for a prepared statement alike API around XPath
 
-#####Release 1.3.2
+##### Release 1.3.2
 * Added <code>__clone</code> method to reset domxpath object when domdocument gets cloned (Thanks to Markus Ineichen for pointing it out)
 
-#####Release 1.3.1
+##### Release 1.3.1
 * PHP 5.3 compatibility: changed interal behavior for incompatible changes from PHP 5.3 to 5.4 (Thanks to Jens Graefe for pointing it out)
 
-#####Release 1.3.0
+##### Release 1.3.0
 * Added appendTextNode method (Thanks to Markus Ineichen)
 * Added appendElement / appendElementNS to DOMDocument to support documentElement "creation" (Thanks to Markus Ineichen)
 * Overwrite createElement / createElementNS to throw exception on error
@@ -108,27 +107,27 @@ Changelog
 * Added (static) Flag for fDOMException to globally enable full exception message
 * Added Unit tests
 
-#####Release 1.2.4
+##### Release 1.2.4
 * PHP 5.4 compatibilty: added support for optional options bitmask on additional methods
 
-#####Release 1.2.3
+##### Release 1.2.3
 * Cleanup code style to adhere coding standard
 * Added entity support for Attributes
 * Added phpcs file to make coding standard public
 
-#####Release 1.2.2
+##### Release 1.2.2
 * Fix Exception to not overwrite final methods of \Exception
 
-#####Release 1.2.1
+##### Release 1.2.1
 * Changed fDOMDocument to be no longer final, use lsb to lookup actual class in constructor.
   This should fix test/mock issues.
 
-#####Release 1.2.0
+##### Release 1.2.0
 * Changed fException to be more compatible with standard exceptions by adding a switch to get full info by getMessage()
 * Merged setAttributes() and setAttributesNS() methods from Andreas
 * Fixed internal registerNamespace variable mixup
 
-#####Release 1.1.0
+##### Release 1.1.0
 * Renamed files to mimic classname cases
 * Fixed inSameDocument to support DOMDocument as well as DOMNodes
 * Added fDOMXPath class providing queryOne(), qoute() and prepare()
@@ -139,11 +138,11 @@ Changelog
 * Bump Copyright
 * Added missing docblocks
 
-#####Release 1.0.2
+##### Release 1.0.2
 * Indenting and typo fixes, minor bugfixes
 
-#####Release 1.0.1
+##### Release 1.0.1
 * Bugfix: typehints corrected
 
-#####Release 1.0.0
+##### Release 1.0.0
 * Initial release
