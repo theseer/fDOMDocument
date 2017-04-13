@@ -28,14 +28,6 @@ As fDOMDocument is a library and does not provide any cli tools, you can only ad
         }
     }
 
-#####PEAR
-The following two commands are all that is required to install fDOMDocument using the PEAR Installer:
-
-    sudo pear channel-discover pear.netpirates.net
-    sudo pear install TheSeer/fDOMDocument
-
-After the installation you can find the source files inside your local PEAR directory; the path is usually either
-``/usr/share/pear/TheSeer/fDOMDocument`` (Fedora/Redhat) or ``/usr/lib/php/TheSeer/fDOMDocument`` (Debian/Ubuntu).
 
 #####YUM (Fedora / Redhat / CentOS)
 The following command will install fDOMDocument via its RPM package:
@@ -70,6 +62,9 @@ Usage Samples
 
 Changelog
 ---------
+#####Release 1.6.2
+* Handle empty string warings from PHP
+
 #####Release 1.6.1
 * Added Workaround for [HHVM Issue #5412](https://github.com/facebook/hhvm/issues/5412)
 
