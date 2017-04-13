@@ -84,6 +84,34 @@ namespace TheSeer\fDOM\Tests {
         /**
          * @expectedException \TheSeer\fDOM\fDOMException
          */
+        public function testAttemptingToLoadAnEmptyXMLStringThrowsException() {
+            $this->dom->loadXML('');
+        }
+
+        /**
+         * @expectedException \TheSeer\fDOM\fDOMException
+         */
+        public function testAttemptingToLoadWithEmptyFilenameThrowsException() {
+            $this->dom->load('');
+        }
+
+        /**
+         * @expectedException \TheSeer\fDOM\fDOMException
+         */
+        public function testAttemptingToLoadHTMLWithAnEmptyFilenameThrowsException() {
+            $this->dom->loadHTMLFile('');
+        }
+
+        /**
+         * @expectedException \TheSeer\fDOM\fDOMException
+         */
+        public function testAttemptingToLoadHMLWithAnEmptyStringThrowsException() {
+            $this->dom->loadHTML('');
+        }
+
+        /**
+         * @expectedException \TheSeer\fDOM\fDOMException
+         */
         public function testloadingInvalidXMLStringThrowsException() {
             $this->dom->loadXML('<?xml version="1.0" ?><broken>');
         }

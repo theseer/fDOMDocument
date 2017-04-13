@@ -138,6 +138,9 @@ namespace TheSeer\fDOM {
          * @return bool|mixed
          */
         public function load($fname, $options = LIBXML_NONET) {
+            if ($fname === '') {
+                throw new fDOMException('empty filename is not allowed', fDOMException::ParseError);
+            }
             $this->xp = NULL;
             $tmp = parent :: load($fname, $options);
             if (!$tmp || libxml_get_last_error()) {
@@ -159,6 +162,9 @@ namespace TheSeer\fDOM {
          * @return boolean
          */
         public function loadXML($source, $options = LIBXML_NONET) {
+            if ($source === '') {
+                throw new fDOMException('empty string not allowed', fDOMException::ParseError);
+            }
             $this->xp = NULL;
             $tmp = parent :: loadXML($source, $options);
             if (!$tmp || libxml_get_last_error()) {
@@ -180,9 +186,12 @@ namespace TheSeer\fDOM {
          * @return boolean
          */
         public function loadHTMLFile($fname, $options = NULL) {
+            if ($fname === '') {
+                throw new fDOMException('empty filename is not allowed', fDOMException::ParseError);
+            }
             $this->xp = NULL;
             if (version_compare(PHP_VERSION, '5.4.0', '<')) {
-                if ($options != NULL) {
+                if ($options !== NULL) {
                     throw new fDOMException('Passing options requires PHP 5.4.0+', fDOMException::LoadError);
                 }
                 $tmp = parent :: loadHTMLFile($fname);
@@ -208,9 +217,12 @@ namespace TheSeer\fDOM {
          * @return boolean
          */
         public function loadHTML($source, $options = NULL) {
+            if ($source === '') {
+                throw new fDOMException('empty string not allowed', fDOMException::ParseError);
+            }
             $this->xp = NULL;
             if (version_compare(PHP_VERSION, '5.4.0', '<')) {
-                if ($options != NULL) {
+                if ($options !== NULL) {
                     throw new fDOMException('Passing options requires PHP 5.4.0+', fDOMException::LoadError);
                 }
                 $tmp = parent :: loadHTML($source);
@@ -252,7 +264,7 @@ namespace TheSeer\fDOM {
          * @return string html content
          */
         public function saveHTML(\DOMNode $node = NULL) {
-            if (version_compare(PHP_VERSION, '5.3.6', '<') && $node != NULL) {
+            if (version_compare(PHP_VERSION, '5.3.6', '<') && $node !== NULL) {
                 throw new fDOMException('Passing a context node requires PHP 5.3.6+', fDOMException::SaveError);
             }
             $tmp = parent::saveHTML($node);
@@ -399,7 +411,7 @@ namespace TheSeer\fDOM {
         public function select($selector, \DOMNode $ctx = NULL, $registerNodeNS = TRUE) {
             $translator = new Translator();
             $xpath = $translator->translate($selector);
-            if ($ctx != NULL) {
+            if ($ctx !== NULL) {
                 $xpath = '.' . $xpath;
             }
             return $this->query($xpath, $ctx, $registerNodeNS);
