@@ -48,7 +48,7 @@ namespace TheSeer\fDOM\Tests {
      * @author     Arne Blankerts <arne@blankerts.de>
      * @copyright  Arne Blankerts <arne@blankerts.de>, All rights reserved.
      */
-    class fDOMDocumentTest extends \PHPUnit_Framework_TestCase {
+    class fDOMDocumentTest extends \PHPUnit\Framework\TestCase {
 
         /**
          * @var fDOMDocument

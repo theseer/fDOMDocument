@@ -44,7 +44,7 @@ namespace TheSeer\fDOM\Tests {
     use TheSeer\fDOM\XPathQuery;
     use TheSeer\fDOM\fDOMDocument;
 
-    class XPathQueryTest extends \PHPUnit_Framework_TestCase {
+    class XPathQueryTest extends \PHPUnit\Framework\TestCase {
 
         private $dom;
 

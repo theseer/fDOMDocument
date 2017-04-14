@@ -191,7 +191,7 @@ namespace TheSeer\fDOM {
          */
         private function buildQuery(fDOMXPath $xp, array $values = NULL) {
             $backup = $this->values;
-            if (count($values) > 0) {
+            if (is_array($values) && count($values) > 0) {
                 foreach($values as $k => $v) {
                     $this->bind($k, $v);
                 }
