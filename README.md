@@ -61,8 +61,11 @@ Usage Samples
 
 Changelog
 ---------
-##### Releaes 1.6.3
+##### Releaes 1.6.4
 * Merge PR 31 to optimize travis builds and git exports (Thanks to @willemstuursma)
+
+##### Releaes 1.6.3
+* Merge PR 29 to fix issues with PHP 7.2
 
 ##### Release 1.6.2
 * Handle empty string warings from PHP
