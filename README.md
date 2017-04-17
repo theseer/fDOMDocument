@@ -61,6 +61,9 @@ Usage Samples
 
 Changelog
 ---------
+##### Releaes 1.6.3
+* Merge PR 31 to optimize travis builds and git exports (Thanks to @willemstuursma)
+
 ##### Release 1.6.2
 * Handle empty string warings from PHP
 
@@ -68,33 +71,33 @@ Changelog
 * Added Workaround for [HHVM Issue #5412](https://github.com/facebook/hhvm/issues/5412)
 
 ##### Release 1.6.0
-* Added <code>createElement*</code> to <code>fDOMEmenet<code> and <code>fDOMDocumentFragment</code> as shortcuts
-* Added <code>appendElement*</code> to <code>fDOMDocumentFragment</code> as shortcuts
+* Added ```createElement*``` to ```fDOMEmenet``` and ```fDOMDocumentFragment``` as shortcuts
+* Added ```appendElement*``` to ```fDOMDocumentFragment``` as shortcuts
 * Enhanced the exception messages of save errors with filenames to contain the filename
 * Fixed fDomDocumentFragment::__toString to actually work
 * Updated / Added some tests
 
 ##### Release 1.5.0
-* Added <code>select</code> to <code>fDOMDocument</code>,<code>fDOMElement</code> and <code>fDOMNode</code> to support
+* Added ```select``` to ```fDOMDocument```,```fDOMElement``` and ```fDOMNode``` to support
   CSS Selectors in favor of XPath only to find nodes
 
-* Added <code>query</code> and <code>queryOne</code> forwardes to <code>fDOMNode</code>
+* Added ```query``` and ```queryOne``` forwardes to ```fDOMNode```
 
 ##### Release 1.4.3
-* Added <code>saveXML</code> and <code>saveHTML</code> to <code>fDOMNode</code> and <code>fDOMElement</code> as a
+* Added ```saveXML``` and ```saveHTML``` to ```fDOMNode``` and ```fDOMElement``` as a
   shortcut to calling those methods on the ownerDocument
 
 ##### Release 1.4.2
-* Added <code>__toString</code> support to <code>fDOMNode</code>, <code>fDOMElement</code>, <code>fDOMDocument</code> and <code>fDOMDocumentFragment</code>
+* Added ```__toString``` support to ```fDOMNode```, ```fDOMElement```, ```fDOMDocument``` and ```fDOMDocumentFragment```
 
 ##### Release 1.4.1
-* Removed unused Interface <code>fDOMNodeInterface</code> from code base
+* Removed unused Interface ```fDOMNodeInterface``` from code base
 
 ##### Release 1.4.0
 * Added XPathQuery helper object, allowing for a prepared statement alike API around XPath
 
 ##### Release 1.3.2
-* Added <code>__clone</code> method to reset domxpath object when domdocument gets cloned (Thanks to Markus Ineichen for pointing it out)
+* Added ```__clone``` method to reset domxpath object when domdocument gets cloned (Thanks to Markus Ineichen for pointing it out)
 
 ##### Release 1.3.1
 * PHP 5.3 compatibility: changed interal behavior for incompatible changes from PHP 5.3 to 5.4 (Thanks to Jens Graefe for pointing it out)
