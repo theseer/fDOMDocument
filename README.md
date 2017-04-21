@@ -61,6 +61,9 @@ Usage Samples
 
 Changelog
 ---------
+##### Releaes 1.6.5
+* Revert git exports limitations as they cause unwanted side effects
+
 ##### Releaes 1.6.4
 * Merge PR 31 to optimize travis builds and git exports (Thanks to @willemstuursma)
 
