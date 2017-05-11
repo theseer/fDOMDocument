@@ -119,11 +119,12 @@ namespace TheSeer\fDOM {
          *
          * @param string $name     Name of not element to create
          * @param string $content  Optional content to be set
+         * @param bool $asTextnode Create content as textNode rather then setting nodeValue
          *
          * @return fDOMElement Reference to created fDOMElement
          */
-        public function appendElement($name, $content = null) {
-            $node = $this->ownerDocument->createElement($name, $content);
+        public function appendElement($name, $content = null, $asTextnode = FALSE) {
+            $node = $this->ownerDocument->createElement($name, $content, $asTextnode);
             $this->appendChild($node);
             return $node;
         }
@@ -134,11 +135,12 @@ namespace TheSeer\fDOM {
          * @param string $ns       Namespace of node to create
          * @param string $name     Name of not element to create
          * @param string $content  Optional content to be set
+         * @param bool $asTextnode Create content as textNode rather then setting nodeValue
          *
          * @return fDOMElement Reference to created fDOMElement
          */
-        public function appendElementNS($ns, $name, $content = null) {
-            $node = $this->ownerDocument->createElementNS($ns, $name, $content);
+        public function appendElementNS($ns, $name, $content = null, $asTextnode = FALSE) {
+            $node = $this->ownerDocument->createElementNS($ns, $name, $content, $asTextnode);
             $this->appendChild($node);
             return $node;
         }

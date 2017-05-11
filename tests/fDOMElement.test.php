@@ -97,12 +97,27 @@ namespace TheSeer\fDOM\Tests {
             $this->assertEquals('text', $node->nodeValue);
         }
 
+        public function testAppendingANewElementAsTextNode() {
+            $node = $this->node->appendElement('append', 'test & demo', true);
+            $this->assertInstanceOf('TheSeer\fDOM\fDOMElement', $node);
+            $this->assertEquals(1, $this->node->query('count(append)'));
+            $this->assertEquals('test & demo', $node->nodeValue);
+        }
+
         public function testAppendingANewElementWithinANamespace() {
             $node = $this->node->appendElementNS('test:uri', 'append', 'text');
             $this->dom->registerNamespace('t','test:uri');
             $this->assertInstanceOf('TheSeer\fDOM\fDOMElement', $node);
             $this->assertEquals(1, $this->node->query('count(t:append)'));
             $this->assertEquals('text', $node->nodeValue);
+        }
+
+        public function testAppendingANewElementWithinANamespaceAsTextNode() {
+            $node = $this->node->appendElementNS('test:uri', 'append', 'test & demo', true);
+            $this->dom->registerNamespace('t','test:uri');
+            $this->assertInstanceOf('TheSeer\fDOM\fDOMElement', $node);
+            $this->assertEquals(1, $this->node->query('count(t:append)'));
+            $this->assertEquals('test & demo', $node->nodeValue);
         }
 
         public function testAppendingANewElementWithinANamespaceByPrefix() {
