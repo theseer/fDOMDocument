@@ -1,4 +1,8 @@
 language: php
+
+sudo: false
+dist: trusty
+
 php:
     - "5.3"
     - "5.4"
@@ -8,6 +12,7 @@ php:
     - "7.1"
     - nightly
     - hhvm
+
 matrix:
   include:
     - php: "5.3"
@@ -17,16 +22,12 @@ matrix:
     - php: hhvm
   fast_finish: true
 
-sudo: false
-dist: trusty
-
 cache:
   directories:
     - $HOME/.composer/cache
 
 notifications:
   email: false
-
 
 before_script:
   - composer self-update
@@ -35,4 +36,3 @@ before_script:
 
 script:
   - vendor/bin/phpunit --verbose
-
