@@ -111,11 +111,12 @@ namespace TheSeer\fDOM {
          * @param string $prefix   Namespace prefix for node to create
          * @param string $name     Name of not element to create
          * @param string $content  Optional content to be set
+         * @param bool $asTextnode Create content as textNode rather then setting nodeValue
          *
          * @return fDOMElement Reference to created fDOMElement
          */
-        public function appendElementPrefix($prefix, $name, $content = null) {
-            $node = $this->ownerDocument->createElementPrefix($prefix, $name, $content);
+        public function appendElementPrefix($prefix, $name, $content = null, $asTextnode = FALSE) {
+            $node = $this->ownerDocument->createElementPrefix($prefix, $name, $content, $asTextnode);
             $this->appendChild($node);
             return $node;
         }
