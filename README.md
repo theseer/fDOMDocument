@@ -23,7 +23,7 @@ As fDOMDocument is a library and does not provide any cli tools, you can only ad
 
     {
         "require": {
-            "theseer/fdomdocument": "1.6.*"
+            "theseer/fdomdocument": "^1.6"
         }
     }
 
@@ -37,14 +37,14 @@ The following command will install fDOMDocument via its RPM package:
 Usage
 -----
 
-Simply require/include the autoload.php supplied and you can start using fDOMDocument as a
-drop in replacement for DOMDocument.
+fDOMDocument is designed as a drop in replacement for DOMDocument. You can either use the composer generated
+autoloader or the provided one.
 
 Usage Samples
 -------------
     <?php
 
-    require 'TheSeer/fDOMDocument/autoload.php';
+    require '/path/to/autoload.php';
 
     $dom = new TheSeer\fDOM\fDOMDocument();
     try {
@@ -61,6 +61,10 @@ Usage Samples
 
 Changelog
 ---------
+##### Release 1.6.6
+* Merge PRs 33+34: Add support for parameter "asTextNode" to fDOMElement::appendElement(). 
+  fDOMElement::appendElementNS() and fDOMElement::appendElementPrefix
+
 ##### Releaes 1.6.5
 * Revert git exports limitations as they cause unwanted side effects
 
