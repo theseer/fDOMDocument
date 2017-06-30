@@ -106,6 +106,14 @@ namespace TheSeer\fDOM\Tests {
             $this->assertEquals('text', $node->nodeValue);
         }
 
+        public function testAppendingANewElementWithinANamespaceAsTextNodeByPrefix() {
+            $this->dom->registerNamespace('t', 'test:uri');
+            $node = $this->frag->appendElementPrefix('t', 'append', 'test & demo', true);
+            $this->assertInstanceOf('TheSeer\fDOM\fDOMElement', $node);
+            $this->assertEquals(1, $this->frag->query('count(t:append)'));
+            $this->assertEquals('test & demo', $node->nodeValue);
+        }
+
         public function testAppendingATextAsTextnode() {
             $node = $this->frag->appendTextNode('test & demo');
             $found = $this->frag->queryOne('text()');
