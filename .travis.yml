@@ -25,6 +25,9 @@ matrix:
     - php: nightly
     - php: hhvm
   fast_finish: true
+  include:
+    - php: "5.3"
+      dist: precise
 
 before_script:
   - composer self-update
