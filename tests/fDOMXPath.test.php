@@ -61,7 +61,7 @@ namespace TheSeer\fDOM\Tests {
          */
         private $xp;
 
-        public function setUp() {
+        public function setUp(): void {
             $this->dom = new fDOMDocument();
             $this->dom->loadXML('<?xml version="1.0" ?><root><node attr="foo" /></root>');
             $this->xp = $this->dom->getDOMXPath();
