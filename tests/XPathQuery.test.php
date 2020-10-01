@@ -48,7 +48,7 @@ namespace TheSeer\fDOM\Tests {
 
         private $dom;
 
-        protected function setUp() {
+        protected function setUp(): void {
             $this->dom = new fDOMDocument();
             $this->dom->loadXML('<?xml version="1.0" ?><root attr="value" />');
         }

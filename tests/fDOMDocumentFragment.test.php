@@ -61,7 +61,7 @@ namespace TheSeer\fDOM\Tests {
          */
         private $frag;
 
-        public function setUp() {
+        public function setUp(): void {
             $this->dom = new fDOMDocument();
             $this->frag = $this->dom->createDocumentFragment();
         }

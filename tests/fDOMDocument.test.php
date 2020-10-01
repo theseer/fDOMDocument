@@ -55,7 +55,7 @@ namespace TheSeer\fDOM\Tests {
          */
         private $dom;
 
-        public function setUp() {
+        public function setUp(): void {
             $this->dom = new fDOMDocument();
         }
 

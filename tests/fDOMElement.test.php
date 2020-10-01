@@ -61,7 +61,7 @@ namespace TheSeer\fDOM\Tests {
          */
         private $node;
 
-        public function setUp() {
+        public function setUp(): void {
             $this->dom = new fDOMDocument();
             $this->dom->loadXML('<?xml version="1.0" ?><root><node><child/></node><node /></root>');
             $this->node = $this->dom->documentElement;
