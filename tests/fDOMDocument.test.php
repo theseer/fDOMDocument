@@ -42,6 +42,7 @@
 namespace TheSeer\fDOM\Tests {
 
     use TheSeer\fDOM\fDOMDocument;
+    use TheSeer\fDOM\fDOMException;
 
     /**
      *
@@ -55,7 +56,7 @@ namespace TheSeer\fDOM\Tests {
          */
         private $dom;
 
-        public function setUp() {
+        public function setUp(): void {
             $this->dom = new fDOMDocument();
         }
 
@@ -74,66 +75,48 @@ namespace TheSeer\fDOM\Tests {
             $this->assertInstanceOf('TheSeer\fDOM\fDOMXpath', $this->dom->getDomXPath());
         }
 
-        /**
-         * @expectedException \TheSeer\fDOM\fDOMException
-         */
         public function testAttemptingToLoadAnXMLStringWithAnUndefinedEntityThrowsException() {
+            $this->expectException(fDOMException::class);
             $this->dom->loadXML('<?xml version="1.0" ?><root>&undefined;</root>');
         }
 
-        /**
-         * @expectedException \TheSeer\fDOM\fDOMException
-         */
         public function testAttemptingToLoadAnEmptyXMLStringThrowsException() {
+            $this->expectException(fDOMException::class);
             $this->dom->loadXML('');
         }
 
-        /**
-         * @expectedException \TheSeer\fDOM\fDOMException
-         */
         public function testAttemptingToLoadWithEmptyFilenameThrowsException() {
+            $this->expectException(fDOMException::class);
             $this->dom->load('');
         }
 
-        /**
-         * @expectedException \TheSeer\fDOM\fDOMException
-         */
         public function testAttemptingToLoadHTMLWithAnEmptyFilenameThrowsException() {
+            $this->expectException(fDOMException::class);
             $this->dom->loadHTMLFile('');
         }
 
-        /**
-         * @expectedException \TheSeer\fDOM\fDOMException
-         */
         public function testAttemptingToLoadHMLWithAnEmptyStringThrowsException() {
+            $this->expectException(fDOMException::class);
             $this->dom->loadHTML('');
         }
 
-        /**
-         * @expectedException \TheSeer\fDOM\fDOMException
-         */
         public function testloadingInvalidXMLStringThrowsException() {
+            $this->expectException(fDOMException::class);
             $this->dom->loadXML('<?xml version="1.0" ?><broken>');
         }
 
-        /**
-         * @expectedException \TheSeer\fDOM\fDOMException
-         */
         public function testTryingToLoadNonExistingFileThrowsException() {
+            $this->expectException(fDOMException::class);
             $this->dom->load('_does_not_exist.xml');
         }
 
-        /**
-         * @expectedException \TheSeer\fDOM\fDOMException
-         */
         public function testloadingBrokenXMLFileThrowsException() {
+            $this->expectException(fDOMException::class);
             $this->dom->load(__DIR__ . '/_data/broken.xml');
         }
 
-        /**
-         * @expectedException \TheSeer\fDOM\fDOMException
-         */
         public function testAttemptingToLoadAnXMLFileWithAnUndefinedEntityThrowsException() {
+            $this->expectException(fDOMException::class);
             $this->dom->load(__DIR__ . '/_data/undefentity.xml');
         }
 
@@ -162,11 +145,9 @@ namespace TheSeer\fDOM\Tests {
             $this->assertEquals($xml, $this->dom->saveXML());
         }
 
-        /**
-         * @expectedException \TheSeer\fDOM\fDOMException
-         */
         public function testSaveXMLThrowsExceptionWithReferenceToNodeFromOtherDocument() {
             $dom = new fDOMDocument();
+            $this->expectException(fDOMException::class);
             $this->dom->saveXML($dom->createElement('foo'));
         }
 
@@ -192,10 +173,8 @@ namespace TheSeer\fDOM\Tests {
             $this->assertAttributeEquals(array('test' => 'test:uri'), 'prefixes', $this->dom);
         }
 
-        /**
-         * @expectedException \TheSeer\fDOM\fDOMException
-         */
         public function testCreatingElementWithInvalidNameThrowsException() {
+            $this->expectException(fDOMException::class);
             $node = $this->dom->createElement('in valid');
         }
 
@@ -216,9 +195,9 @@ namespace TheSeer\fDOM\Tests {
 
         /**
          * @covers \TheSeer\fDOM\fDOMDocument::createElementPrefix
-         * @expectedException \TheSeer\fDOM\fDOMException
          */
         public function testTryingToCreateNewElementByprefixWithUndefinedPrefixThrowsException() {
+            $this->expectException(fDOMException::class);
             $this->dom->createElementPrefix('test', 'node');
         }
 
@@ -228,10 +207,8 @@ namespace TheSeer\fDOM\Tests {
             $this->assertEquals('test & demo', $node->nodeValue);
         }
 
-        /**
-         * @expectedException \TheSeer\fDOM\fDOMException
-         */
         public function testSettingContentUnescapedForNewElementThrowsExceptionOnInvalidEntity() {
+            $this->expectException(fDOMException::class);
             $node = $this->dom->createElement('test', "test & demo");
         }
 
@@ -246,10 +223,8 @@ namespace TheSeer\fDOM\Tests {
             $this->assertEquals('test & demo', $node->nodeValue);
         }
 
-        /**
-         * @expectedException  \TheSeer\fDOM\fDOMException
-         */
         public function testSettingContentUnescapedForNewElementWithNamespaceThrowsExceptionOnInvalidEntity() {
+            $this->expectException(fDOMException::class);
             $node = $this->dom->createElementNS('test:uri', 'test', "test & demo");
         }
 

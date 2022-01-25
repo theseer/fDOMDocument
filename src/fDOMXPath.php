@@ -90,6 +90,7 @@ namespace TheSeer\fDOM {
          *
          * @return \DOMNodeList
          */
+        #[\ReturnTypeWillChange]
         public function query($q, \DOMNode $ctx = null, $registerNodeNS = true) {
             libxml_clear_errors();
             if (version_compare(PHP_VERSION, '5.3.3', '<') || strpos(PHP_VERSION, 'hiphop') || strpos(PHP_VERSION, 'hhvm')) {
@@ -113,6 +114,7 @@ namespace TheSeer\fDOM {
          *
          * @return mixed
          */
+        #[\ReturnTypeWillChange]
         public function evaluate($q, \DOMNode $ctx = null, $registerNodeNS = true) {
             libxml_clear_errors();
             if (version_compare(PHP_VERSION, '5.3.3', '<') || strpos(PHP_VERSION, 'hiphop') || strpos(PHP_VERSION, 'hhvm')) {

@@ -168,7 +168,7 @@ namespace TheSeer\fDOM {
             $this->xp = NULL;
             $tmp = parent :: loadXML($source, $options);
             if (!$tmp || libxml_get_last_error()) {
-                throw new fDOMException('parsing string failed', fDOMException::ParseError);
+                throw new fDOMException('parsing string failed:' . (libxml_get_last_error())->message, fDOMException::ParseError);
             }
             $this->registerNodeClasses();
             return TRUE;
@@ -246,6 +246,7 @@ namespace TheSeer\fDOM {
          *
          * @return integer bytes saved
          */
+        #[\ReturnTypeWillChange]
         public function save($filename, $options = NULL) {
             $tmp = parent::save($filename, $options);
             if (!$tmp) {
@@ -263,6 +264,7 @@ namespace TheSeer\fDOM {
          *
          * @return string html content
          */
+        #[\ReturnTypeWillChange]
         public function saveHTML(\DOMNode $node = NULL) {
             if (version_compare(PHP_VERSION, '5.3.6', '<') && $node !== NULL) {
                 throw new fDOMException('Passing a context node requires PHP 5.3.6+', fDOMException::SaveError);
@@ -284,6 +286,7 @@ namespace TheSeer\fDOM {
          *
          * @return integer bytes saved
          */
+        #[\ReturnTypeWillChange]
         public function saveHTMLFile($filename, $options = NULL) {
             $tmp = parent::saveHTMLFile($filename, $options);
             if (!$tmp) {
@@ -302,9 +305,15 @@ namespace TheSeer\fDOM {
          *
          * @return string serialized XML
          */
+        #[\ReturnTypeWillChange]
         public function saveXML(\DOMNode $node = NULL, $options = NULL) {
             try {
-                $tmp = parent::saveXML($node, $options);
+                if ($options !== null) {
+                    $tmp = parent::saveXML($node, $options);
+                } else {
+                    $tmp = parent::saveXML($node);
+                }
+
                 if (!$tmp) {
                     throw new fDOMException('Serializing to XML failed', fDOMException::SaveError);
                 }
@@ -541,7 +550,9 @@ namespace TheSeer\fDOM {
 
         /**
          * @return fDOMDocumentFragment
+         *
          */
+        #[\ReturnTypeWillChange]
         public function createDocumentFragment() {
             return $this->ensureIntance(parent::createDocumentFragment());
         }

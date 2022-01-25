@@ -42,6 +42,7 @@
 namespace TheSeer\fDOM\Tests {
 
     use TheSeer\fDOM\fDOMDocument;
+    use TheSeer\fDOM\fDOMException;
     use TheSeer\fDOM\fDOMXPath;
 
     /**
@@ -61,7 +62,7 @@ namespace TheSeer\fDOM\Tests {
          */
         private $xp;
 
-        public function setUp() {
+        public function setUp(): void {
             $this->dom = new fDOMDocument();
             $this->dom->loadXML('<?xml version="1.0" ?><root><node attr="foo" /></root>');
             $this->xp = $this->dom->getDOMXPath();
@@ -69,11 +70,13 @@ namespace TheSeer\fDOM\Tests {
 
         /**
          * @covers TheSeer\fDOM\fDOMXPath::query
-         * @expectedException TheSeer\fDOM\fDOMException
          */
         public function testExecutingAQueryWithInvalidXPathThrowsException() {
+            $this->expectException(fDOMException::class);
             $this->xp->query('//[invalid');
+
         }
+
 
         public function testQueryReturnsNodeList() {
             $res = $this->xp->query('//*');
@@ -83,9 +86,9 @@ namespace TheSeer\fDOM\Tests {
 
         /**
          * @covers TheSeer\fDOM\fDOMXPath::evaluate
-         * @expectedException TheSeer\fDOM\fDOMException
          */
         public function testExecutingAQueryWithEvaluateWithInvalidXPathThrowsException() {
+            $this->expectException(fDOMException::class);
             $this->xp->evaluate('//[invalid');
         }
 

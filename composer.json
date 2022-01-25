@@ -18,6 +18,9 @@
         "ext-dom": "*",
         "lib-libxml": "*"
     },
+    "require-dev": {
+        "php": ">=7.3"
+    },
     "autoload": {
         "classmap": [
             "src/"

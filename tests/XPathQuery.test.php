@@ -43,12 +43,13 @@ namespace TheSeer\fDOM\Tests {
 
     use TheSeer\fDOM\XPathQuery;
     use TheSeer\fDOM\fDOMDocument;
+    use TheSeer\fDOM\XPathQueryException;
 
     class XPathQueryTest extends \PHPUnit\Framework\TestCase {
 
         private $dom;
 
-        protected function setUp() {
+        protected function setUp(): void {
             $this->dom = new fDOMDocument();
             $this->dom->loadXML('<?xml version="1.0" ?><root attr="value" />');
         }
@@ -59,11 +60,9 @@ namespace TheSeer\fDOM\Tests {
             $this->assertEquals(array('key'), $xp->getKeys());
         }
 
-        /**
-         * @expectedException TheSeer\fDOM\XPathQueryException
-         */
         public function testTryingToBindNonExistingKeyThrowsException() {
             $xp = new XPathQuery(':key');
+            $this->expectException(XPathQueryException::class);
             $xp->bind('other', 123);
         }
 

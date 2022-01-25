@@ -69,6 +69,7 @@ namespace TheSeer\fDOM {
          *
          * @return bool true on success
          */
+        #[\ReturnTypeWillChange]
         public function appendXML($str) {
             if (!parent::appendXML($str)) {
                 throw new fDOMException('Appending xml string failed', fDOMException::ParseError);

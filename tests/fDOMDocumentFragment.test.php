@@ -43,6 +43,7 @@ namespace TheSeer\fDOM\Tests {
 
     use TheSeer\fDOM\fDOMDocument;
     use TheSeer\fDOM\fDOMDocumentFragment;
+    use TheSeer\fDOM\fDOMException;
 
     /**
      *
@@ -61,7 +62,7 @@ namespace TheSeer\fDOM\Tests {
          */
         private $frag;
 
-        public function setUp() {
+        public function setUp(): void {
             $this->dom = new fDOMDocument();
             $this->frag = $this->dom->createDocumentFragment();
         }
@@ -71,10 +72,8 @@ namespace TheSeer\fDOM\Tests {
             $this->assertEquals('some', $this->frag->firstChild->nodeName);
         }
 
-        /**
-         * @expectedException \TheSeer\fDOM\fDOMException
-         */
         public function testTryingToAppendInvalidXMLToFragmentThrowsException() {
+            $this->expectException(fDOMException::class);
             $this->frag->appendXML('<foo');
         }
 

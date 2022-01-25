@@ -231,6 +231,7 @@ namespace TheSeer\fDOM {
          *
          * @return string
          */
+        #[\ReturnTypeWillChange]
         public function getAttribute($attr, $default='') {
             return $this->hasAttribute($attr) ? parent::getAttribute($attr) : $default;
         }
@@ -246,6 +247,7 @@ namespace TheSeer\fDOM {
          *
          * @return string
          */
+        #[\ReturnTypeWillChange]
         public function getAttributeNS($ns, $attr, $default='') {
             return $this->hasAttributeNS($ns, $attr) ? parent::getAttributeNS($ns, $attr) : $default;
         }
@@ -263,6 +265,7 @@ namespace TheSeer\fDOM {
          *
          * @see DOMElement::setAttribute()
          */
+        #[\ReturnTypeWillChange]
         public function setAttribute($attr, $value, $keepEntities=false) {
             if ($keepEntities === true) {
                 $attrNode = $this->ownerDocument->createAttribute($attr);
@@ -289,6 +292,7 @@ namespace TheSeer\fDOM {
          * @return \DOMAttr|null
          * @see DOMElement::setAttribute()
          */
+        #[\ReturnTypeWillChange]
         public function setAttributeNS($ns, $attr, $value, $keepEntities=false) {
             if ($keepEntities === true) {
                 $attrNode = $this->ownerDocument->createAttributeNS($ns, $attr);

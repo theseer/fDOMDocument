@@ -5,14 +5,13 @@ The classes contained within this repository extend the standard DOM to use exce
 all occasions of errors instead of PHP warnings or notices. They also add various custom methods
 and shortcuts for convenience and to simplify the usage of DOM.
 
-[![Build Status](https://travis-ci.org/theseer/fDOMDocument.png)](https://travis-ci.org/theseer/fDOMDocument)
-
 Requirements
 ------------
 
     PHP: 5.3.3 (5.3.0-5.3.2 had serious issues with spl stacked autoloaders)
     Extensions: dom, libxml
 
+    Aus of 1.6.7, tests will require PHPUnit 8.5 and PHP 7.3+
 
 Installation
 ------------
@@ -61,6 +60,10 @@ Usage Samples
 
 Changelog
 ---------
+##### Release 1.6.7
+* Add `#[\ReturnTypeWillChange]` attribute to shut up PHP 8.1 notices on return types
+* Fix deprecation notice for passing `NULL` where `int` is expected
+
 ##### Release 1.6.6
 * Merge PRs 33+34: Add support for parameter "asTextNode" to fDOMElement::appendElement(). 
   fDOMElement::appendElementNS() and fDOMElement::appendElementPrefix
